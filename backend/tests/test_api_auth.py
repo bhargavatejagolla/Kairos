@@ -220,3 +220,20 @@ async def test_auth_api_flow() -> None:
             },
         )
         assert res_new_pw.status_code == 200
+
+        # 15. Test Logout All Devices endpoint
+        new_access = res_new_pw.json()["access_token"]
+        new_refresh = res_new_pw.json()["refresh_token"]
+
+        res_logout_all = await client.post(
+            "/api/v1/auth/logout-all",
+            headers={"Authorization": f"Bearer {new_access}"},
+        )
+        assert res_logout_all.status_code == 200
+        assert "devices successfully" in res_logout_all.json()["message"]
+
+        # The refresh token from that login should now be revoked
+        res_ref_after_logout_all = await client.post(
+            "/api/v1/auth/refresh", json={"refresh_token": new_refresh}
+        )
+        assert res_ref_after_logout_all.status_code == 401

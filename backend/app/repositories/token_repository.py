@@ -19,13 +19,21 @@ class TokenRepository(BaseRepository[RefreshToken]):
         return result.scalar_one_or_none()
 
     async def create_token(
-        self, user_id: uuid.UUID, token_id: str, expires_at: datetime
+        self,
+        user_id: uuid.UUID,
+        token_id: str,
+        expires_at: datetime,
+        *,
+        user_agent: str | None = None,
+        ip_address: str | None = None,
     ) -> RefreshToken:
         token = RefreshToken(
             user_id=user_id,
             token_id=token_id,
             expires_at=expires_at,
             revoked=False,
+            user_agent=user_agent,
+            ip_address=ip_address,
         )
         return await self.create(token)
 
@@ -48,3 +56,6 @@ class TokenRepository(BaseRepository[RefreshToken]):
         )
         await self.session.commit()
         return result.rowcount
+
+
+SessionRepository = TokenRepository

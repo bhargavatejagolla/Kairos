@@ -1,6 +1,6 @@
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Request, status
 
 from app.api.deps.auth import ActiveUserDep
 from app.api.deps.services import get_auth_service
@@ -23,13 +23,21 @@ AuthServiceDep = Annotated[AuthService, Depends(get_auth_service)]
     "/login",
     response_model=TokenResponse,
     status_code=status.HTTP_200_OK,
-    summary="User login to obtain access and refresh tokens",
+    summary="Authenticate a user",
+    description="Returns access and refresh tokens.",
 )
 async def login(
+    request: Request,
     login_in: LoginRequest,
     service: AuthServiceDep,
 ) -> TokenResponse:
-    return await service.login(login_in)
+    user_agent = request.headers.get("User-Agent")
+    ip_address = request.client.host if request.client else None
+    return await service.login(
+        login_in,
+        user_agent=user_agent,
+        ip_address=ip_address,
+    )
 
 
 @router.post(
@@ -56,6 +64,19 @@ async def logout(
 ) -> dict[str, Any]:
     await service.logout(logout_in.refresh_token)
     return {"message": "Logged out successfully"}
+
+
+@router.post(
+    "/logout-all",
+    status_code=status.HTTP_200_OK,
+    summary="Revoke all refresh tokens to terminate sessions across all devices",
+)
+async def logout_all(
+    current_user: ActiveUserDep,
+    service: AuthServiceDep,
+) -> dict[str, Any]:
+    revoked_count = await service.logout_all(current_user.id)
+    return {"message": f"Logged out from {revoked_count} devices successfully"}
 
 
 @router.get(

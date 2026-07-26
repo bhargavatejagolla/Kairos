@@ -38,7 +38,16 @@ class AuthService:
             self.repository = session_or_repo
             self.token_repository = token_repository
 
-    async def login(self, login_in: LoginRequest) -> TokenResponse:
+        self.users = self.repository
+        self.sessions = self.token_repository
+
+    async def login(
+        self,
+        login_in: LoginRequest,
+        *,
+        user_agent: str | None = None,
+        ip_address: str | None = None,
+    ) -> TokenResponse:
         """Authenticate user by email/password and issue JWT token pair with session tracking."""
         user = await self.repository.get_by_email(login_in.email)
         if not user:
@@ -57,7 +66,11 @@ class AuthService:
             jti = get_token_jti(refresh_token)
             exp = get_token_expiration(refresh_token)
             await self.token_repository.create_token(
-                user_id=user.id, token_id=jti, expires_at=exp
+                user_id=user.id,
+                token_id=jti,
+                expires_at=exp,
+                user_agent=user_agent,
+                ip_address=ip_address,
             )
 
         return TokenResponse(
@@ -130,6 +143,12 @@ class AuthService:
         if self.token_repository:
             return await self.token_repository.revoke_by_jti(jti)
         return True
+
+    async def logout_all(self, user_id: UUID) -> int:
+        """Revoke all active refresh tokens for a user across all devices."""
+        if self.token_repository:
+            return await self.token_repository.revoke_all_for_user(user_id)
+        return 0
 
     async def change_password(
         self, user_id: UUID, current_password: str, new_password: str
