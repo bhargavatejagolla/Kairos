@@ -115,3 +115,50 @@ async def test_auth_service_unit(db_session: AsyncSession) -> None:
     token_deleted_user = create_refresh_token(subject=uuid4())
     with pytest.raises(UnauthorizedException, match="User no longer active or found"):
         await auth_service.refresh_tokens(token_deleted_user)
+
+    # 12. Test Refresh Token Rotation reuse detection (security event)
+    await user_service.update_user(user.id, UserUpdate(is_active=True))
+    fresh_login = await auth_service.login(
+        LoginRequest(email="authunit@example.com", password="unitpassword123")
+    )
+    rotated_res = await auth_service.refresh_tokens(fresh_login.refresh_token)
+    assert rotated_res.access_token is not None
+
+    # Attempting to reuse the rotated out refresh token should trigger reuse detection and revoke all sessions!
+    with pytest.raises(UnauthorizedException, match="terminated"):
+        await auth_service.refresh_tokens(fresh_login.refresh_token)
+
+    # Even the new rotated token should now be revoked due to the security event!
+    with pytest.raises(UnauthorizedException, match="terminated|unrecognized"):
+        await auth_service.refresh_tokens(rotated_res.refresh_token)
+
+    # 13. Test logout
+    login_for_logout = await auth_service.login(
+        LoginRequest(email="authunit@example.com", password="unitpassword123")
+    )
+    assert await auth_service.logout(login_for_logout.refresh_token) is True
+    with pytest.raises(UnauthorizedException):
+        await auth_service.refresh_tokens(login_for_logout.refresh_token)
+
+    # 14. Test change password
+    with pytest.raises(InvalidCredentialsError):
+        await auth_service.change_password(user.id, "wrongold", "newpass123")
+    assert (
+        await auth_service.change_password(user.id, "unitpassword123", "newpass123")
+        is True
+    )
+    # Login with old password should fail, new password should succeed
+    with pytest.raises(InvalidCredentialsError):
+        await auth_service.login(
+            LoginRequest(email="authunit@example.com", password="unitpassword123")
+        )
+    new_login = await auth_service.login(
+        LoginRequest(email="authunit@example.com", password="newpass123")
+    )
+    assert new_login.access_token is not None
+
+    # 15. Test validate_password_strength
+    from app.core.security import validate_password_strength
+
+    assert validate_password_strength("1234567") is False
+    assert validate_password_strength("12345678") is True

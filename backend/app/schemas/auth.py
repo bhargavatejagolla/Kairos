@@ -19,6 +19,15 @@ class RefreshTokenRequest(SchemaBase):
     refresh_token: str
 
 
+class LogoutRequest(SchemaBase):
+    refresh_token: str
+
+
+class ChangePasswordRequest(SchemaBase):
+    current_password: str
+    new_password: str
+
+
 class CurrentUserResponse(SchemaBase):
     model_config = ConfigDict(from_attributes=True)
     user: UserResponse

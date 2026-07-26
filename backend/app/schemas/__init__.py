@@ -1,6 +1,8 @@
 from app.schemas.auth import (
+    ChangePasswordRequest,
     CurrentUserResponse,
     LoginRequest,
+    LogoutRequest,
     RefreshTokenRequest,
     TokenResponse,
 )
@@ -15,8 +17,10 @@ from app.schemas.user import (
 )
 
 __all__ = [
+    "ChangePasswordRequest",
     "CurrentUserResponse",
     "LoginRequest",
+    "LogoutRequest",
     "RefreshTokenRequest",
     "SchemaBase",
     "TokenResponse",

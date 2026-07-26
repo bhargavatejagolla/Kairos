@@ -6,6 +6,7 @@ import jwt
 
 from app.core.config import settings
 from app.core.exceptions import UnauthorizedException
+from app.core.token_types import TokenType
 
 
 def create_access_token(
@@ -22,7 +23,7 @@ def create_access_token(
         "iat": now,
         "jti": str(uuid4()),
         "sub": str(subject),
-        "type": "access",
+        "type": TokenType.ACCESS,
     }
     return jwt.encode(
         to_encode, settings.jwt_secret_key, algorithm=settings.jwt_algorithm
@@ -43,7 +44,7 @@ def create_refresh_token(
         "iat": now,
         "jti": str(uuid4()),
         "sub": str(subject),
-        "type": "refresh",
+        "type": TokenType.REFRESH,
     }
     return jwt.encode(
         to_encode, settings.jwt_secret_key, algorithm=settings.jwt_algorithm
@@ -63,10 +64,28 @@ def decode_token(token: str) -> dict[str, Any]:
         raise UnauthorizedException("Invalid token")
 
 
-def verify_token(token: str, expected_type: str = "access") -> dict[str, Any]:
+def verify_token(token: str, expected_type: str = TokenType.ACCESS) -> dict[str, Any]:
     """Verify a token is valid and of the expected type ('access' or 'refresh')."""
     payload = decode_token(token)
     token_type = payload.get("type")
     if token_type != expected_type:
         raise UnauthorizedException(f"Invalid token type: expected {expected_type}")
     return payload
+
+
+def get_token_expiration(token: str) -> datetime:
+    """Extract expiration datetime from token."""
+    payload = decode_token(token)
+    exp = payload.get("exp")
+    if not exp:
+        raise UnauthorizedException("Token missing expiration")
+    return datetime.fromtimestamp(exp, tz=timezone.utc)
+
+
+def get_token_jti(token: str) -> str:
+    """Extract unique JTI from token."""
+    payload = decode_token(token)
+    jti = payload.get("jti")
+    if not jti:
+        raise UnauthorizedException("Token missing JTI")
+    return str(jti)

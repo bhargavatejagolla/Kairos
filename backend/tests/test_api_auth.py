@@ -160,3 +160,63 @@ async def test_auth_api_flow() -> None:
             "/api/v1/auth/me", headers={"Authorization": f"Bearer {token_deleted}"}
         )
         assert res_deleted.status_code == 401
+
+        # Assert new dependencies are exported
+        assert dep_auth.VerifiedUserDep is not None
+        assert dep_auth.get_current_verified_user is not None
+        assert dep_auth.require_auth is not None
+
+        # 13. Test Logout endpoint
+        await client.patch(f"/api/v1/users/{user_id}", json={"is_active": True})
+        res_login_fresh = await client.post("/api/v1/auth/login", json=login_payload)
+        assert res_login_fresh.status_code == 200
+        fresh_refresh = res_login_fresh.json()["refresh_token"]
+
+        res_logout = await client.post(
+            "/api/v1/auth/logout", json={"refresh_token": fresh_refresh}
+        )
+        assert res_logout.status_code == 200
+        assert res_logout.json()["message"] == "Logged out successfully"
+
+        # Attempting refresh after logout should fail with 401
+        res_ref_after_logout = await client.post(
+            "/api/v1/auth/refresh", json={"refresh_token": fresh_refresh}
+        )
+        assert res_ref_after_logout.status_code == 401
+
+        # 14. Test Change Password endpoint
+        res_login_for_cp = await client.post("/api/v1/auth/login", json=login_payload)
+        assert res_login_for_cp.status_code == 200
+        cp_access = res_login_for_cp.json()["access_token"]
+        cp_refresh = res_login_for_cp.json()["refresh_token"]
+
+        cp_payload = {
+            "current_password": "supersecretpassword",
+            "new_password": "newsupersecretpassword",
+        }
+        res_cp = await client.post(
+            "/api/v1/auth/change-password",
+            json=cp_payload,
+            headers={"Authorization": f"Bearer {cp_access}"},
+        )
+        assert res_cp.status_code == 200
+        assert res_cp.json()["message"] == "Password changed successfully"
+
+        # After password change, existing refresh tokens should be revoked!
+        res_ref_after_cp = await client.post(
+            "/api/v1/auth/refresh", json={"refresh_token": cp_refresh}
+        )
+        assert res_ref_after_cp.status_code == 401
+
+        # Login with old password fails, new password succeeds
+        res_old_pw = await client.post("/api/v1/auth/login", json=login_payload)
+        assert res_old_pw.status_code == 401
+
+        res_new_pw = await client.post(
+            "/api/v1/auth/login",
+            json={
+                "email": "auth_user@example.com",
+                "password": "newsupersecretpassword",
+            },
+        )
+        assert res_new_pw.status_code == 200

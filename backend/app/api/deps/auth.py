@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Any
 from uuid import UUID
 
 from fastapi import Depends
@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps.database import get_db
 from app.core.exceptions import UnauthorizedException
 from app.core.jwt import verify_token
+from app.core.token_types import TokenType
 from app.db.models.user import User
 from app.repositories.user import UserRepository
 
@@ -22,7 +23,7 @@ async def get_current_user(
     if not token:
         raise UnauthorizedException("Not authenticated")
 
-    payload = verify_token(token.credentials, expected_type="access")
+    payload = verify_token(token.credentials, expected_type=TokenType.ACCESS)
     user_id_str = payload.get("sub")
     if not user_id_str:
         raise UnauthorizedException("Invalid token payload")
@@ -53,3 +54,18 @@ async def get_current_active_user(
 
 
 ActiveUserDep = Annotated[User, Depends(get_current_active_user)]
+
+
+async def get_current_verified_user(
+    current_user: ActiveUserDep,
+) -> User:
+    """Ensure the authenticated user is verified (currently checks active status until email infra exists)."""
+    return current_user
+
+
+VerifiedUserDep = Annotated[User, Depends(get_current_verified_user)]
+
+
+def require_auth() -> Any:
+    """Dependency factory ensuring a valid active user is present."""
+    return Depends(get_current_active_user)

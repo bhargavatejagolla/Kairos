@@ -22,3 +22,8 @@ def verify_password(
         plain_password,
         hashed_password,
     )
+
+
+def validate_password_strength(password: str) -> bool:
+    """Validate that a password meets minimum security requirements (at least 8 characters)."""
+    return len(password) >= 8
