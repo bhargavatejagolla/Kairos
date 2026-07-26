@@ -99,3 +99,34 @@ class CannotRemoveLastOwnerError(BadRequestException):
 class ReservedSlugError(BadRequestException):
     def __init__(self, detail: str = "Organization slug is reserved") -> None:
         super().__init__(detail)
+
+
+# Project Domain Exceptions
+class EnvironmentNotFoundError(ResourceNotFoundException):
+    def __init__(self) -> None:
+        super().__init__("Environment")
+
+
+class EnvironmentInUseError(BadRequestException):
+    def __init__(self) -> None:
+        super().__init__("Environment is currently in use by projects")
+
+
+class ProjectNotFoundError(ResourceNotFoundException):
+    def __init__(self, detail: str = "Project") -> None:
+        super().__init__(detail)
+
+
+class ProjectAlreadyExistsError(DuplicateResourceException):
+    def __init__(self) -> None:
+        super().__init__("Project with this slug already exists in the organization")
+
+
+class ProjectArchivedError(BadRequestException):
+    def __init__(self) -> None:
+        super().__init__("Project is archived and cannot be modified")
+
+
+class InvalidProjectStateError(BadRequestException):
+    def __init__(self, detail: str) -> None:
+        super().__init__(detail)

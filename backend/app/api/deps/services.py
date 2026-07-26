@@ -79,3 +79,92 @@ async def get_organization_service(
         org_repo=OrganizationRepository(db),
         membership_service=membership_service,
     )
+
+
+async def get_environment_service(
+    db: Annotated[AsyncSession, Depends(get_db)],
+) -> "EnvironmentService":
+    from app.repositories.environment import EnvironmentRepository
+    from app.repositories.project import ProjectRepository
+    from app.services.environment_service import EnvironmentService
+
+    return EnvironmentService(
+        environment_repo=EnvironmentRepository(db),
+        project_repo=ProjectRepository(db),
+    )
+
+
+async def get_project_settings_service(
+    db: Annotated[AsyncSession, Depends(get_db)],
+) -> "ProjectSettingsService":
+    from app.repositories.project_settings import ProjectSettingsRepository
+    from app.services.project_settings_service import ProjectSettingsService
+
+    return ProjectSettingsService(
+        settings_repo=ProjectSettingsRepository(db),
+    )
+
+
+async def get_project_service(
+    db: Annotated[AsyncSession, Depends(get_db)],
+) -> "ProjectService":
+    from app.repositories.environment import EnvironmentRepository
+    from app.repositories.project import ProjectRepository
+    from app.services.project_service import ProjectService
+
+    return ProjectService(
+        project_repo=ProjectRepository(db),
+        environment_repo=EnvironmentRepository(db),
+        session=db,
+    )
+
+async def get_service_service(
+    db: Annotated[AsyncSession, Depends(get_db)],
+) -> "ServiceService":
+    from app.repositories.service import ServiceRepository
+    from app.services.service_service import ServiceService
+
+    return ServiceService(
+        repository=ServiceRepository(db),
+    )
+
+async def get_timeline_service(
+    db: Annotated[AsyncSession, Depends(get_db)],
+) -> "TimelineService":
+    from app.repositories.timeline import TimelineRepository
+    from app.services.timeline_service import TimelineService
+
+    return TimelineService(
+        repository=TimelineRepository(db),
+    )
+
+async def get_workflow_engine() -> "WorkflowEngine":
+    from app.core.workflow import WorkflowEngine
+    return WorkflowEngine()
+
+async def get_incident_service(
+    db: Annotated[AsyncSession, Depends(get_db)],
+    timeline_service: Annotated["TimelineService", Depends(get_timeline_service)],
+    workflow_engine: Annotated["WorkflowEngine", Depends(get_workflow_engine)],
+) -> "IncidentService":
+    from app.repositories.incident import IncidentRepository
+    from app.services.incident_service import IncidentService
+
+    return IncidentService(
+        repository=IncidentRepository(db),
+        timeline_service=timeline_service,
+        workflow_engine=workflow_engine,
+        session=db,
+    )
+
+async def get_assignment_service(
+    db: Annotated[AsyncSession, Depends(get_db)],
+) -> "AssignmentService":
+    from app.repositories.incident import IncidentRepository
+    from app.repositories.user import UserRepository
+    from app.services.assignment_service import AssignmentService
+
+    return AssignmentService(
+        incident_repo=IncidentRepository(db),
+        user_repo=UserRepository(db),
+    )

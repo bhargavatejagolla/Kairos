@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from app.api.exception_handlers import register_exception_handlers
-from app.api.v1 import auth, organizations, permissions, ping, roles, users
+from app.api.v1 import auth, organizations, permissions, ping, projects, roles, users
 from app.container.application import container
 from app.core.lifespan import lifespan
 from app.middleware.request_id import RequestIDMiddleware
@@ -36,4 +36,7 @@ app.include_router(
 )
 app.include_router(
     organizations.router, prefix="/api/v1",
+)
+app.include_router(
+    projects.router, prefix="/api/v1/organizations/{slug}/projects", tags=["Projects"]
 )

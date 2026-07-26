@@ -9,6 +9,12 @@ from app.db.models.refresh_token import RefreshToken
 from app.db.models.role import Role
 from app.db.models.role_permission import role_permissions
 from app.db.models.user import User
+from app.db.models.service import Service
+from app.db.models.service_dependency import ServiceDependency
+from app.db.models.incident import Incident
+from app.db.models.incident_timeline import IncidentTimeline
+from app.db.models.incident_comment import IncidentComment
+from app.db.models.incident_attachment import IncidentAttachment
 
 __all__ = [
     "Base",
@@ -22,4 +28,10 @@ __all__ = [
     "Environment",
     "Project",
     "ProjectSettings",
+    "Service",
+    "ServiceDependency",
+    "Incident",
+    "IncidentTimeline",
+    "IncidentComment",
+    "IncidentAttachment",
 ]

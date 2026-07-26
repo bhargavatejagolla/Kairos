@@ -1,0 +1,17 @@
+from enum import Enum
+
+class ServiceType(str, Enum):
+    API = "API"
+    FRONTEND = "FRONTEND"
+    BACKEND = "BACKEND"
+    WORKER = "WORKER"
+    DATABASE = "DATABASE"
+    CACHE = "CACHE"
+    QUEUE = "QUEUE"
+    MESSAGE_BROKER = "MESSAGE_BROKER"
+    ML_MODEL = "ML_MODEL"
+    LLM = "LLM"
+    KUBERNETES_SERVICE = "KUBERNETES_SERVICE"
+    SERVERLESS = "SERVERLESS"
+    CRON_JOB = "CRON_JOB"
+    EXTERNAL = "EXTERNAL"

@@ -10,20 +10,33 @@ class Permission(StrEnum):
 
     # Organizations
     ORGANIZATIONS_READ = "organizations:read"
+    ORGANIZATIONS_VIEW = "organizations:view"
     ORGANIZATIONS_CREATE = "organizations:create"
     ORGANIZATIONS_UPDATE = "organizations:update"
     ORGANIZATIONS_DELETE = "organizations:delete"
 
-    # Projects
-    PROJECTS_READ = "projects:read"
+    # Member permissions
+    MEMBERS_VIEW = "members:view"
+    MEMBERS_ADD = "members:add"
+    MEMBERS_REMOVE = "members:remove"
+    MEMBERS_ROLE_UPDATE = "members:role:update"
+
+    # Project permissions
     PROJECTS_CREATE = "projects:create"
+    PROJECTS_VIEW = "projects:view"
     PROJECTS_UPDATE = "projects:update"
+    PROJECTS_ARCHIVE = "projects:archive"
+    PROJECTS_RESTORE = "projects:restore"
     PROJECTS_DELETE = "projects:delete"
+    PROJECTS_SETTINGS_UPDATE = "projects:settings:update"
 
     # Incidents
-    INCIDENTS_READ = "incidents:read"
+    INCIDENTS_VIEW = "incidents:view"
     INCIDENTS_CREATE = "incidents:create"
     INCIDENTS_UPDATE = "incidents:update"
+    INCIDENTS_ASSIGN = "incidents:assign"
+    INCIDENTS_RESOLVE = "incidents:resolve"
+    INCIDENTS_CLOSE = "incidents:close"
     INCIDENTS_DELETE = "incidents:delete"
 
     # Alerts
