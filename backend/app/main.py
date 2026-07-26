@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from app.api.exception_handlers import register_exception_handlers
-from app.api.v1 import auth, ping, users
+from app.api.v1 import auth, organizations, permissions, ping, roles, users
 from app.container.application import container
 from app.core.lifespan import lifespan
 from app.middleware.request_id import RequestIDMiddleware
@@ -30,3 +30,10 @@ async def health() -> dict[str, str]:
 app.include_router(ping.router, prefix="/api/v1", tags=["Ping"])
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
 app.include_router(users.router, prefix="/api/v1/users", tags=["Users"])
+app.include_router(roles.router, prefix="/api/v1/roles", tags=["Roles"])
+app.include_router(
+    permissions.router, prefix="/api/v1/permissions", tags=["Permissions"]
+)
+app.include_router(
+    organizations.router, prefix="/api/v1",
+)

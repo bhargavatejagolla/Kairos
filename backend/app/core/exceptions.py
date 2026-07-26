@@ -25,6 +25,21 @@ class UnauthorizedException(HTTPException):
         )
 
 
+class RoleNotFoundError(HTTPException):
+    def __init__(self, detail: str = "Role not found") -> None:
+        super().__init__(status_code=404, detail=detail)
+
+
+class PermissionNotFoundError(HTTPException):
+    def __init__(self, detail: str = "Permission not found") -> None:
+        super().__init__(status_code=404, detail=detail)
+
+
+class RoleAlreadyExistsError(HTTPException):
+    def __init__(self, detail: str = "Role already exists") -> None:
+        super().__init__(status_code=400, detail=detail)
+
+
 class DuplicateResourceException(HTTPException):
     def __init__(self, detail: str) -> None:
         super().__init__(
@@ -54,3 +69,33 @@ class PermissionDeniedError(HTTPException):
             status_code=403,
             detail=detail,
         )
+
+
+class OrganizationNotFoundError(ResourceNotFoundException):
+    def __init__(self) -> None:
+        super().__init__("Organization")
+
+
+class OrganizationAlreadyExistsError(DuplicateResourceException):
+    def __init__(self, detail: str = "Organization already exists") -> None:
+        super().__init__(detail)
+
+
+class MembershipNotFoundError(ResourceNotFoundException):
+    def __init__(self) -> None:
+        super().__init__("Organization Member")
+
+
+class DuplicateMembershipError(DuplicateResourceException):
+    def __init__(self, detail: str = "User is already a member of this organization") -> None:
+        super().__init__(detail)
+
+
+class CannotRemoveLastOwnerError(BadRequestException):
+    def __init__(self, detail: str = "Cannot remove the last owner of an organization") -> None:
+        super().__init__(detail)
+
+
+class ReservedSlugError(BadRequestException):
+    def __init__(self, detail: str = "Organization slug is reserved") -> None:
+        super().__init__(detail)

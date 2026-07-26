@@ -30,3 +30,29 @@ class UUIDPrimaryKeyMixin:
         primary_key=True,
         default=uuid7,
     )
+
+
+class OrganizationOwnedModel:
+    """
+    Mixin for models that belong to an organization.
+    
+    This provides the organization_id foreign key and a generic 
+    relationship back to the organization. Phase 8+ entities
+    (Projects, Incidents, etc.) should inherit from this.
+    """
+    
+    @classmethod
+    def __declare_last__(cls):
+        from sqlalchemy import ForeignKey
+        from sqlalchemy.orm import relationship
+
+        cls.organization_id = mapped_column(
+            UUID(as_uuid=True),
+            ForeignKey("organizations.id", ondelete="CASCADE"),
+            nullable=False,
+            index=True,
+        )
+        cls.organization = relationship(
+            "Organization",
+            lazy="selectin",
+        )

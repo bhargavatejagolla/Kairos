@@ -7,6 +7,21 @@ from app.schemas.auth import (
     TokenResponse,
 )
 from app.schemas.base import SchemaBase
+from app.schemas.organization import (
+    AddMemberRequest,
+    ChangeMemberRoleRequest,
+    MemberResponse,
+    OrganizationCreate,
+    OrganizationResponse,
+    OrganizationUpdate,
+)
+from app.schemas.role import (
+    AssignPermissionRequest,
+    PermissionResponse,
+    RoleCreate,
+    RoleResponse,
+    RoleUpdate,
+)
 from app.schemas.user import (
     UserCreate,
     UserListResponse,
@@ -30,4 +45,15 @@ __all__ = [
     "UserPublic",
     "UserResponse",
     "UserUpdate",
+    "RoleCreate",
+    "RoleUpdate",
+    "RoleResponse",
+    "PermissionResponse",
+    "AssignPermissionRequest",
+    "OrganizationCreate",
+    "OrganizationUpdate",
+    "OrganizationResponse",
+    "AddMemberRequest",
+    "ChangeMemberRoleRequest",
+    "MemberResponse",
 ]
