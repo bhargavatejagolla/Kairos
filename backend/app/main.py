@@ -1,17 +1,19 @@
 from fastapi import FastAPI
 
 from app.api.v1 import ping
-from app.core.config import settings
+from app.container.application import container
 from app.core.handlers import register_exception_handlers
 from app.core.lifespan import lifespan
+from app.middleware.request_id import RequestIDMiddleware
 
 app = FastAPI(
-    title=settings.app_name,
-    version=settings.app_version,
+    title=container.settings.app_name,
+    version=container.settings.app_version,
     description="AI-Powered DevOps Incident Intelligence Platform",
     lifespan=lifespan,
 )
 
+app.add_middleware(RequestIDMiddleware)
 register_exception_handlers(app)
 
 
