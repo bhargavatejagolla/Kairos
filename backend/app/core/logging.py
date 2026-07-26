@@ -24,7 +24,7 @@ def configure_logging() -> None:
     )
 
     structlog.configure(
-        processors=processors,
+        processors=processors,  # type: ignore[arg-type]
         logger_factory=structlog.stdlib.LoggerFactory(),
         cache_logger_on_first_use=True,
     )

@@ -11,5 +11,5 @@ router = APIRouter()
 @router.get("/ping")
 async def ping(
     service: Annotated[PingService, Depends(get_ping_service)],
-):
+) -> dict[str, str]:
     return service.ping()

@@ -2,7 +2,7 @@ from fastapi import HTTPException
 
 
 class ResourceNotFoundException(HTTPException):
-    def __init__(self, resource: str):
+    def __init__(self, resource: str) -> None:
         super().__init__(
             status_code=404,
             detail=f"{resource} not found",
@@ -10,7 +10,7 @@ class ResourceNotFoundException(HTTPException):
 
 
 class BadRequestException(HTTPException):
-    def __init__(self, message: str):
+    def __init__(self, message: str) -> None:
         super().__init__(
             status_code=400,
             detail=message,
@@ -18,8 +18,39 @@ class BadRequestException(HTTPException):
 
 
 class UnauthorizedException(HTTPException):
-    def __init__(self):
+    def __init__(self, detail: str = "Unauthorized") -> None:
         super().__init__(
             status_code=401,
-            detail="Unauthorized",
+            detail=detail,
+        )
+
+
+class DuplicateResourceException(HTTPException):
+    def __init__(self, detail: str) -> None:
+        super().__init__(
+            status_code=409,
+            detail=detail,
+        )
+
+
+class UserNotFoundError(ResourceNotFoundException):
+    def __init__(self) -> None:
+        super().__init__("User")
+
+
+class UserAlreadyExistsError(DuplicateResourceException):
+    def __init__(self, detail: str = "User already exists") -> None:
+        super().__init__(detail)
+
+
+class InvalidCredentialsError(UnauthorizedException):
+    def __init__(self) -> None:
+        super().__init__("Invalid credentials")
+
+
+class PermissionDeniedError(HTTPException):
+    def __init__(self, detail: str = "Permission denied") -> None:
+        super().__init__(
+            status_code=403,
+            detail=detail,
         )

@@ -1,7 +1,7 @@
-from uuid6 import uuid7
-
-from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
+from starlette.responses import Response
+from uuid6 import uuid7
 
 
 class RequestIDMiddleware(BaseHTTPMiddleware):
@@ -9,7 +9,9 @@ class RequestIDMiddleware(BaseHTTPMiddleware):
     Adds a unique request ID to every request.
     """
 
-    async def dispatch(self, request: Request, call_next):
+    async def dispatch(
+        self, request: Request, call_next: RequestResponseEndpoint
+    ) -> Response:
 
         request_id = str(uuid7())
 

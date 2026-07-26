@@ -1,5 +1,3 @@
-import pytest
-from app.api.deps.database import get_db
 from app.core.config import settings
 from app.db.session import AsyncSessionLocal, engine
 

@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
-from app.main import app
+
 from app.api.deps.services import get_ping_service
+from app.main import app
 from app.services.ping_service import PingService
 
 client = TestClient(app)
