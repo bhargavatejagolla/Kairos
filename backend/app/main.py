@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from app.api.v1 import ping
 from app.core.config import settings
+from app.core.handlers import register_exception_handlers
 from app.core.lifespan import lifespan
 
 app = FastAPI(
@@ -10,6 +11,8 @@ app = FastAPI(
     description="AI-Powered DevOps Incident Intelligence Platform",
     lifespan=lifespan,
 )
+
+register_exception_handlers(app)
 
 
 @app.get("/")
