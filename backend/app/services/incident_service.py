@@ -2,7 +2,7 @@ from uuid import UUID
 from datetime import datetime, UTC
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.exceptions import ResourceNotFoundError
+from app.core.exceptions import ResourceNotFoundException as ResourceNotFoundError
 from app.db.models.incident import Incident
 from app.db.models.enums import IncidentStatus, TimelineEvent
 from app.repositories.incident import IncidentRepository

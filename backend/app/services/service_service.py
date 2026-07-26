@@ -2,7 +2,7 @@ from uuid import UUID
 from typing import Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.exceptions import ResourceNotFoundError, ResourceAlreadyExistsError
+from app.core.exceptions import ResourceNotFoundException as ResourceNotFoundError, DuplicateResourceException as ResourceAlreadyExistsError
 from app.db.models.service import Service
 from app.repositories.service import ServiceRepository
 from app.schemas.service import ServiceCreate, ServiceUpdate

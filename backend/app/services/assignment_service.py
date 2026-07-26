@@ -2,7 +2,7 @@ from uuid import UUID
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.incident import Incident
-from app.core.exceptions import BusinessLogicError
+from app.core.exceptions import BadRequestException
 from app.repositories.incident import IncidentRepository
 from app.repositories.user import UserRepository
 
@@ -14,7 +14,7 @@ class AssignmentService:
     async def assign_incident(self, incident: Incident, user_id: UUID) -> Incident:
         user = await self.user_repo.get(user_id)
         if not user:
-            raise BusinessLogicError(f"User {user_id} does not exist.")
+            raise BadRequestException(f"User {user_id} does not exist.")
             
         incident.assigned_to = user_id
         await self.incident_repo.update(incident)
