@@ -207,7 +207,7 @@ Ensure you have the following installed on your system:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/kairos.git
+git clone https://github.com/bhargavatejagolla/kairos.git
 cd kairos
 
 # 2. Configure environment variables
