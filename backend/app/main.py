@@ -40,3 +40,21 @@ app.include_router(
 app.include_router(
     projects.router, prefix="/api/v1/organizations/{slug}/projects", tags=["Projects"]
 )
+
+# AI Routes
+from app.api.ai import (
+    chat_router,
+    incident_router,
+    alert_router,
+    knowledge_router,
+    prompt_router,
+    conversation_router,
+)
+
+app.include_router(chat_router, prefix="/api/v1/ai/chat", tags=["AI Chat"])
+app.include_router(incident_router, prefix="/api/v1/ai/incidents", tags=["AI Incidents"])
+app.include_router(alert_router, prefix="/api/v1/ai/alerts", tags=["AI Alerts"])
+app.include_router(knowledge_router, prefix="/api/v1/knowledge", tags=["AI Knowledge"])
+app.include_router(prompt_router, prefix="/api/v1/prompts", tags=["AI Prompts"])
+app.include_router(conversation_router, prefix="/api/v1/ai/conversations", tags=["AI Conversations"])
+

@@ -30,6 +30,18 @@ from app.db.models.maintenance_window import MaintenanceWindow
 from app.db.models.escalation_policy import EscalationPolicy
 from app.db.models.notification_channel import NotificationChannel
 
+# Phase 11 Models
+from app.db.models.ai_conversation import AIConversation
+from app.db.models.ai_message import AIMessage
+from app.db.models.ai_prompt import AIPrompt
+from app.db.models.ai_response import AIResponse
+from app.db.models.knowledge_document import KnowledgeDocument
+from app.db.models.knowledge_chunk import KnowledgeChunk
+from app.db.models.embedding import Embedding
+from app.db.models.ai_usage import AIUsage
+from app.db.models.api_key import APIKey
+from app.db.models.ai_cache import AICache
+
 __all__ = [
     "Base",
     "User",
@@ -60,4 +72,14 @@ __all__ = [
     "MaintenanceWindow",
     "EscalationPolicy",
     "NotificationChannel",
+    "AIConversation",
+    "AIMessage",
+    "AIPrompt",
+    "AIResponse",
+    "KnowledgeDocument",
+    "KnowledgeChunk",
+    "Embedding",
+    "AIUsage",
+    "APIKey",
+    "AICache",
 ]
