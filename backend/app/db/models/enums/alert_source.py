@@ -1,0 +1,8 @@
+from enum import Enum
+
+class AlertSource(str, Enum):
+    PROMETHEUS = "PROMETHEUS"
+    DATADOG = "DATADOG"
+    AWS_CLOUDWATCH = "AWS_CLOUDWATCH"
+    CUSTOM_WEBHOOK = "CUSTOM_WEBHOOK"
+    AI_ANOMALY = "AI_ANOMALY"

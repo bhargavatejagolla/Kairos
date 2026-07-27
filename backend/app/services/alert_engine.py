@@ -1,0 +1,87 @@
+import logging
+from typing import List, Optional
+from uuid import UUID
+from datetime import datetime, timezone
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.db.models.alert import Alert
+from app.db.models.alert_rule import AlertRule
+from app.db.models.enums import AlertStatus
+from app.repositories.alert import AlertRepository
+from app.repositories.alert_rule import AlertRuleRepository
+from app.services.silence_engine import SilenceEngine
+from app.services.maintenance_engine import MaintenanceEngine
+from app.services.correlation_engine import CorrelationEngine
+from app.services.policy_engine import PolicyEngine
+from app.schemas.evaluation import EvaluationResult
+
+logger = logging.getLogger(__name__)
+
+class AlertEngine:
+    """
+    Owns the Alert lifecycle and orchestrates downstream engines.
+    """
+    def __init__(self, session: AsyncSession):
+        self.session = session
+        self.alert_repo = AlertRepository(session)
+        self.silence_engine = SilenceEngine(session)
+        self.maintenance_engine = MaintenanceEngine(session)
+        self.correlation_engine = CorrelationEngine(session)
+        self.policy_engine = PolicyEngine(session)
+
+    async def process_evaluation(self, organization_id: UUID, project_id: UUID, service_id: UUID, result: EvaluationResult) -> Optional[Alert]:
+        if not result.triggered:
+            return None
+            
+        # Check if already exists (Deduplication)
+        existing_alert = await self.alert_repo.get_by_fingerprint(result.fingerprint, AlertStatus.OPEN)
+        if existing_alert:
+            logger.info(f"Alert {result.fingerprint} already OPEN, ignoring.")
+            return existing_alert
+            
+        # Create Alert
+        alert = Alert(
+            rule_id=UUID(result.rule_id),
+            service_id=service_id,
+            status=AlertStatus.OPEN,
+            severity=result.severity,
+            title=result.title,
+            message=result.message,
+            fingerprint=result.fingerprint,
+            triggered_at=datetime.now(timezone.utc)
+        )
+        self.session.add(alert)
+        await self.session.flush() # Needed to get alert.id for correlations
+        
+        # Check Suppression
+        if await self.silence_engine.is_silenced(service_id, alert) or \
+           await self.maintenance_engine.is_active(service_id, alert):
+            alert.status = AlertStatus.SUPPRESSED
+            await self.session.commit()
+            return alert
+            
+        # Correlate
+        group = await self.correlation_engine.correlate(organization_id, alert)
+        
+        # Apply Policy
+        await self.policy_engine.apply(organization_id, project_id, alert, group)
+        
+        await self.session.commit()
+        await self.session.refresh(alert)
+        return alert
+
+    async def acknowledge(self, alert_id: UUID) -> Alert:
+        alert = await self.alert_repo.get(alert_id)
+        if alert and alert.status == AlertStatus.OPEN:
+            alert.status = AlertStatus.ACKNOWLEDGED
+            alert.acknowledged_at = datetime.now(timezone.utc)
+            await self.session.commit()
+        return alert
+
+    async def resolve(self, alert_id: UUID) -> Alert:
+        alert = await self.alert_repo.get(alert_id)
+        if alert and alert.status in [AlertStatus.OPEN, AlertStatus.ACKNOWLEDGED]:
+            alert.status = AlertStatus.RESOLVED
+            alert.resolved_at = datetime.now(timezone.utc)
+            await self.session.commit()
+        return alert

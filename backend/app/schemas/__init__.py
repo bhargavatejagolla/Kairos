@@ -63,6 +63,25 @@ from app.schemas.statistics import (
     IncidentStatistics,
 )
 
+# Phase 10 Schemas
+from app.schemas.signal import (
+    SignalIn,
+    SignalOut,
+)
+from app.schemas.alert import (
+    AlertCreate,
+    AlertResponse,
+)
+from app.schemas.alert_rule import (
+    RuleCreate,
+    RuleUpdate,
+    RuleResponse,
+    AlertConditionSchema,
+)
+from app.schemas.evaluation import (
+    EvaluationResult,
+)
+
 __all__ = [
     "ChangePasswordRequest",
     "CurrentUserResponse",
@@ -106,4 +125,13 @@ __all__ = [
     "TimelineEntryCreate",
     "TimelineEntryResponse",
     "IncidentStatistics",
+    "SignalIn",
+    "SignalOut",
+    "AlertCreate",
+    "AlertResponse",
+    "RuleCreate",
+    "RuleUpdate",
+    "RuleResponse",
+    "AlertConditionSchema",
+    "EvaluationResult",
 ]

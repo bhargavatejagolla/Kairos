@@ -16,6 +16,20 @@ from app.db.models.incident_timeline import IncidentTimeline
 from app.db.models.incident_comment import IncidentComment
 from app.db.models.incident_attachment import IncidentAttachment
 
+# Phase 10 Models
+from app.db.models.signal import Signal
+from app.db.models.alert_rule import AlertRule
+from app.db.models.rule_definition import RuleDefinition
+from app.db.models.alert_condition import AlertCondition
+from app.db.models.alert_policy import AlertPolicy
+from app.db.models.alert import Alert
+from app.db.models.alert_group import AlertGroup
+from app.db.models.alert_correlation import AlertCorrelation
+from app.db.models.silence import Silence
+from app.db.models.maintenance_window import MaintenanceWindow
+from app.db.models.escalation_policy import EscalationPolicy
+from app.db.models.notification_channel import NotificationChannel
+
 __all__ = [
     "Base",
     "User",
@@ -34,4 +48,16 @@ __all__ = [
     "IncidentTimeline",
     "IncidentComment",
     "IncidentAttachment",
+    "Signal",
+    "AlertRule",
+    "RuleDefinition",
+    "AlertCondition",
+    "AlertPolicy",
+    "Alert",
+    "AlertGroup",
+    "AlertCorrelation",
+    "Silence",
+    "MaintenanceWindow",
+    "EscalationPolicy",
+    "NotificationChannel",
 ]
