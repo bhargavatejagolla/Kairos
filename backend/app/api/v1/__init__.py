@@ -17,6 +17,7 @@ from .alert_rules import router as alert_rules_router
 from .policies import router as policies_router
 from .silences import router as silences_router
 from .maintenance import router as maintenance_router
+from .background import router as background_router
 
 routers = [
     ping_router,
@@ -38,4 +39,5 @@ routers = [
     policies_router,
     silences_router,
     maintenance_router,
+    background_router,
 ]

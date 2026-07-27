@@ -82,4 +82,18 @@ __all__ = [
     "AIUsage",
     "APIKey",
     "AICache",
+    "BackgroundTask",
+    "TaskExecution",
+    "TaskSchedule",
+    "WorkerNode",
+    "TaskLog",
+    "DeadLetterTask"
 ]
+
+# Phase 12 Models
+from app.background.models.task import BackgroundTask
+from app.background.models.execution import TaskExecution
+from app.background.models.schedule import TaskSchedule
+from app.background.models.worker import WorkerNode
+from app.background.models.task_log import TaskLog
+from app.background.models.dead_letter import DeadLetterTask

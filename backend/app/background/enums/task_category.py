@@ -1,0 +1,12 @@
+from enum import Enum
+
+class TaskCategory(str, Enum):
+    AI = "AI"
+    NOTIFICATION = "NOTIFICATION"
+    INCIDENT = "INCIDENT"
+    KNOWLEDGE = "KNOWLEDGE"
+    DEPLOYMENT = "DEPLOYMENT"
+    REPORT = "REPORT"
+    SYSTEM = "SYSTEM"
+    INTEGRATION = "INTEGRATION"
+    SECURITY = "SECURITY"

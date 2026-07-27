@@ -1,24 +1,20 @@
-# ⚡ KAIROS: Incident Intelligence Platform
-
 <div align="center">
 
-![KAIROS Banner](https://img.shields.io/badge/KAIROS-Incident%20Intelligence%20Platform-4F46E5?style=for-the-badge&logo=kubernetes&logoColor=white)
+# ⚡ KAIROS: Enterprise AI Site Reliability Engineer Platform
 
-**Transform Production Incidents into Organizational Knowledge with AI-Powered Telemetry Correlation & Similarity Search**
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=KAIROS&fontSize=90&animation=fadeIn&fontAlignY=38&desc=Intelligent%20Incident%20Response%20%7C%20AI-Driven%20Telemetry%20%7C%20Distributed%20Execution&descAlignY=55&descAlign=62" width="100%" />
 
-[![CI/CD Pipeline](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/features/actions)
-[![Kubernetes](https://img.shields.io/badge/Kubernetes-k3d%20Cluster-326CE5?style=flat-square&logo=kubernetes&logoColor=white)](https://k3d.io/)
-[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-Dashboard-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-pgvector-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://github.com/pgvector/pgvector)
-[![AI Powered](https://img.shields.io/badge/AI-Groq%20LLM-FF6B6B?style=flat-square&logo=openai&logoColor=white)](https://groq.com/)
-[![Security](https://img.shields.io/badge/Trivy-Security%20Scan-18ffff?style=flat-square&logo=aquasecurity&logoColor=black)](https://github.com/aquasecurity/trivy)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Built By](https://img.shields.io/badge/Built_By-Golla_Bhargava_Teja-FF6B6B?style=for-the-badge&logo=codeigniter)](https://github.com/bhargavatejagolla)
+[![Platform](https://img.shields.io/badge/Platform-Enterprise_Grade-4169E1?style=for-the-badge&logo=kubernetes)](#)
+[![Python](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-Dashboard-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker)](https://www.docker.com/)
 
----
+**Transform Production Incidents into Organizational Knowledge with AI-Powered Telemetry Correlation, Vector Similarity Search, and a Robust Distributed Processing Engine.**
 
-[Explore Features](#-core-features) • [System Architecture](#%EF%B8%8F-system-architecture) • [Getting Started](#-quick-start) • [Documentation](#-documentation) • [Roadmap](#-roadmap)
+[Explore Features](#-core-features) • [System Architecture](#%EF%B8%8F-system-architecture) • [Getting Started](#-quick-start) • [Documentation](#-documentation)
+
+<br/>
 
 </div>
 
@@ -28,28 +24,31 @@
 
 In Greek mythology, **Kairos (καιρός)** represents the *opportune moment*—the exact right time for decisive action. 
 
-In modern cloud-native DevOps, when a production deployment fails or an infrastructure incident strikes, every second counts. **KAIROS** captures that critical moment, automatically aggregating telemetry across isolated tools, correlating logs and metrics, synthesizing root-cause summaries using AI, and preserving the resolution in a vector-powered engineering memory bank so **your team never solves the same problem twice.**
+In modern cloud-native DevOps, when a production deployment fails or an infrastructure incident strikes, every second counts. **KAIROS** acts as an **Enterprise AI Site Reliability Engineer**, automatically aggregating telemetry across isolated tools, correlating logs and metrics, synthesizing root-cause summaries using LLMs, and executing asynchronous remediation workflows. 
+
+Designed and engineered by **Golla Bhargava Teja**, KAIROS ensures **your team never solves the same problem twice.**
 
 > *"When a deployment breaks, engineers shouldn't waste hours manually jumping between Grafana, Prometheus, Loki, Kubernetes CLI, and GitHub. KAIROS unifies your entire observability context into one coherent narrative."*
 
 ---
 
-## 🚨 The Problem vs. 💡 The KAIROS Solution
+## 🚀 The AI Enterprise Advantage
 
 | ❌ Traditional Incident Response (Manual & Siloed) | ✅ The KAIROS Way (Automated & Intelligent) |
 | :--- | :--- |
 | **Information Silos:** Engineers open 5+ browser tabs (Grafana, Loki, GitHub Actions, K8s dashboard) to piece together clues. | **Unified Evidence Gathering:** Automatically collects metrics, logs, deployment changes, and cluster events into a single timeline. |
 | **Context Switching:** Mentally correlating high CPU alerts at 14:02 with a pod restart at 14:03 and a git commit at 14:00. | **Automated Correlation:** Links code deployments directly to application failures and infrastructure degradation. |
 | **Tribal Knowledge & Memory Loss:** When the senior SRE who solved an issue leaves the company, the knowledge leaves with them. | **Vector Memory Bank (pgvector):** Embeds incident signatures into PostgreSQL. When a new bug appears, KAIROS instantly recommends past resolutions. |
+| **Monolithic Bottlenecks:** Direct API calls blocking threads waiting on 3rd-party services. | **Distributed Background Engine:** Idempotent, robust workflow engine built on Celery, Redis, and event buses ensuring 0% data loss. |
 | **Slow MTTR (Mean Time To Resolution):** Average investigation takes 30 to 110 minutes of trial and error. | **AI Root-Cause Analysis:** Groq LLM digests complex stack traces and metrics to provide instant, plain-English summaries and action items. |
 
 ---
 
-## 🔄 The Five-Stage Intelligence Workflow
+## 🔄 The Enterprise Intelligence Workflow
 
-Everything KAIROS builds fits seamlessly into five core operational stages:
+KAIROS executes complex workflows through a decoupled, Event-Driven Architecture:
 
-```
+```text
      ┌───────────┐
   ┌─▶│  COLLECT  │  📡 Gather logs, metrics, events, and deployment proof from DevOps tools
   │  └─────┬─────┘
@@ -59,7 +58,7 @@ Everything KAIROS builds fits seamlessly into five core operational stages:
   │  └─────┬─────┘
   │        ▼
   │  ┌───────────┐
-  │  │  ANALYZE  │  🧠 Groq LLM synthesizes root-cause summaries & remediation steps
+  │  │  ANALYZE  │  🧠 Groq LLM synthesizes root-cause summaries via Distributed Background Jobs
   │  └─────┬─────┘
   │        ▼
   │  ┌───────────┐
@@ -90,29 +89,29 @@ Everything KAIROS builds fits seamlessly into five core operational stages:
       <td><code>GitHub Actions</code>, <code>Docker</code></td>
     </tr>
     <tr>
-      <td><b>🛡️ Container Security</b></td>
-      <td>Continuous container vulnerability scanning integrated directly into the CI/CD pipeline before cluster deployment.</td>
-      <td><code>Trivy Scanner</code></td>
+      <td><b>🛡️ Security & RBAC</b></td>
+      <td>Enterprise-grade Role-Based Access Control, deep API protections, and Trivy vulnerability scans.</td>
+      <td><code>OAuth2</code>, <code>Trivy Scanner</code>, <code>FastAPI Security</code></td>
     </tr>
     <tr>
-      <td><b>☸️ Orchestration</b></td>
-      <td>Lightweight, fast, local multi-node Kubernetes cluster management for reproducible staging and prod simulation.</td>
-      <td><code>k3d</code>, <code>Kubernetes</code>, <code>Helm</code></td>
+      <td><b>☸️ Distributed Processing</b></td>
+      <td>Enterprise Job Framework processing AI evaluations and alerts asynchronously with Dead Letter Queues and Distributed Locks.</td>
+      <td><code>Celery</code>, <code>Redis</code>, <code>Event Bus</code></td>
     </tr>
     <tr>
       <td><b>📈 Observability Stack</b></td>
-      <td>Real-time system metrics scraping, alert evaluation, and centralized high-throughput log aggregation.</td>
-      <td><code>Prometheus</code>, <code>Grafana</code>, <code>Loki</code></td>
+      <td>Real-time system metrics scraping, alert evaluation, structured logging, and distributed tracing.</td>
+      <td><code>Prometheus</code>, <code>Grafana</code>, <code>Loki</code>, <code>OpenTelemetry</code></td>
     </tr>
     <tr>
       <td><b>🤖 AI Root-Cause Engine</b></td>
       <td>Ultra-fast LLM inference that analyzes stack traces and Prometheus metrics to explain *why* something broke.</td>
-      <td><code>Groq API</code> (Llama 3), <code>FastAPI</code></td>
+      <td><code>Groq API</code>, <code>FastAPI</code></td>
     </tr>
     <tr>
       <td><b>🧠 Similarity Search</b></td>
       <td>Semantic similarity search over historical incidents using high-dimensional embeddings to find past fixes.</td>
-      <td><code>sentence-transformers</code>, <code>pgvector</code></td>
+      <td><code>pgvector</code>, <code>HuggingFace</code></td>
     </tr>
     <tr>
       <td><b>🖥️ Interactive Dashboard</b></td>
@@ -126,52 +125,56 @@ Everything KAIROS builds fits seamlessly into five core operational stages:
 
 ## 🏗️ System Architecture
 
-KAIROS is engineered as a clean, multi-layered cloud-native platform:
+KAIROS is engineered as a clean, multi-layered cloud-native platform following Enterprise Clean Architecture principles:
 
 ```mermaid
 graph TB
     subgraph "1️⃣ Presentation Layer"
-        UI[🖥️ React Dashboard<br/>Incident & Deployment View]
-        GRAF[📊 Grafana Dashboards<br/>Metrics & Log Viewer]
+        UI[🖥️ React Dashboard]
+        GRAF[📊 Grafana Dashboards]
     end
 
     subgraph "2️⃣ Intelligence & API Layer (FastAPI)"
-        API[⚡ KAIROS Core API]
-        COLL[📥 Telemetry Collector<br/>Metrics / Logs / Events]
-        AI[🤖 AI Summarizer & Embedder<br/>Groq API + Transformers]
+        API[⚡ KAIROS Core API & Event Bus]
+        COLL[📥 Telemetry Collector]
+        AI[🤖 AI Service]
     end
 
-    subgraph "3️⃣ Storage & Memory Layer"
-        PG[(🗄️ PostgreSQL + pgvector<br/>Incidents, Deployments & Vectors)]
+    subgraph "3️⃣ Distributed Execution (Celery + Redis)"
+        WK_AI[🧠 AI Worker Pool]
+        WK_AL[🚨 Alert Worker Pool]
+        WK_NT[✉️ Notification Pool]
+        REG[🔄 Workflow Registry]
     end
 
-    subgraph "4️⃣ Observability Layer"
-        PROM[📈 Prometheus<br/>Metrics Collector]
-        LOKI[📜 Loki<br/>Log Aggregator]
+    subgraph "4️⃣ Storage & Memory Layer"
+        PG[(🗄️ PostgreSQL + pgvector)]
+        RED[(🔥 Redis Broker/Cache)]
     end
 
-    subgraph "5️⃣ Infrastructure & CI/CD Layer"
-        GH[🐙 GitHub / CI-CD<br/>GitHub Actions + Trivy Scan]
-        K8S[☸️ Kubernetes Cluster<br/>k3d Engine]
+    subgraph "5️⃣ Observability & Infrastructure"
+        PROM[📈 Prometheus]
+        LOKI[📜 Loki]
+        K8S[☸️ Kubernetes / Docker]
     end
 
-    %% Data Flow Connections
-    GH -->|Deploy & Scan| K8S
-    K8S -->|Scrape Metrics| PROM
-    K8S -->|Stream Logs| LOKI
+    %% Flow Connections
+    UI <--> API
+    API --> REG
+    REG --> RED
+    RED --> WK_AI
+    RED --> WK_AL
+    RED --> WK_NT
     
-    PROM -->|Metrics Query| COLL
-    LOKI -->|Log Query| COLL
-    K8S -->|Cluster Events| COLL
-    GH -->|Deployment Metadata| COLL
+    WK_AI <--> AI
+    WK_AI <--> PG
+    API <--> PG
     
-    COLL -->|Correlated Payload| API
-    API <-->|Analyze & Embed| AI
-    API <-->|Query & Store Vectors| PG
-    
-    UI <-->|REST / JSON| API
-    GRAF <-->|Datasources| PROM
-    GRAF <-->|Datasources| LOKI
+    K8S --> PROM
+    K8S --> LOKI
+    PROM --> COLL
+    LOKI --> COLL
+    COLL --> API
 ```
 
 ---
@@ -181,11 +184,10 @@ graph TB
 | Layer | Technology | Role & Responsibility |
 | :--- | :--- | :--- |
 | **Version Control & CI/CD** | Git, GitHub Actions | Automated linting, testing, Docker builds, and security gates. |
-| **Container & Runtime** | Docker, Trivy | Image packaging and static vulnerability detection. |
-| **Orchestration** | Kubernetes (`k3d`), Helm | Container management, self-healing, service discovery, and routing. |
-| **Metrics & Monitoring** | Prometheus | Time-series data scraping (CPU, Memory, Network, Latency). |
-| **Log Aggregation** | Grafana Loki | Centralized, label-based log querying and stack-trace capture. |
-| **Backend API** | Python 3.11+, FastAPI | High-performance async REST API, telemetry correlation, and business logic. |
+| **Message Broker / Cache** | Redis | Rate limiting, distributed locking, Celery brokering, caching. |
+| **Background Processing** | Celery | Async AI inference, scheduled maintenance, Slack/Email dispatch. |
+| **Metrics & Tracing** | Prometheus, OpenTelemetry | Telemetry data, structured logs via Structlog, circuit breakers. |
+| **Backend API** | Python 3.12+, FastAPI | High-performance async REST API, telemetry correlation, clean architecture. |
 | **AI & LLM** | Groq API, HuggingFace | Sub-second incident summarization and embedding generation. |
 | **Database & Vectors** | PostgreSQL, `pgvector` | Relational storage and vector similarity index for historical incident matching. |
 | **Frontend UI** | React, Vite | Modern, responsive dashboard for engineering teams. |
@@ -199,9 +201,7 @@ Get the entire KAIROS platform running on your local machine in minutes.
 ### 📋 Prerequisites
 Ensure you have the following installed on your system:
 - [Docker & Docker Compose](https://www.docker.com/)
-- [k3d](https://k3d.io/) (for local Kubernetes cluster)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [Git](https://git-scm.com/)
+- Python 3.12+ (For backend development)
 
 ### ⚡ 1-Minute Local Setup
 
@@ -212,15 +212,12 @@ cd kairos
 
 # 2. Configure environment variables
 cp .env.example .env
-# Optional: Add your GROQ_API_KEY inside .env for AI summarization features
+# Edit .env and inject your Groq API Keys to enable AI capabilities.
 
-# 3. Create the local Kubernetes cluster
-k3d cluster create kairos-cluster --api-port 6550 -p "8080:80@loadbalancer"
-
-# 4. Launch backend, database, observability stack, and dashboard via Docker Compose
+# 3. Launch backend, database, observability stack, and dashboard via Docker Compose
 docker-compose up -d --build
 
-# 5. Verify deployment status
+# 4. Verify deployment status
 docker-compose ps
 ```
 
@@ -234,75 +231,19 @@ Once deployed, access the respective portals via your browser:
 | **FastAPI Swagger Docs** | `http://localhost:8000/docs` | Interactive OpenAPI documentation and API tester |
 | **Grafana Portal** | `http://localhost:3001` | System metrics, custom charts, and Loki log explorer |
 | **Prometheus UI** | `http://localhost:9090` | Raw metric targets, PromQL query builder |
+| **Flower (Workers)** | `http://localhost:5555` | Celery Background Job Monitoring UI |
 
 ---
 
-## 📁 Project Structure
+## 🤝 Authors & Contributors
 
-<details>
-<summary><b>Click to expand the comprehensive workspace directory tree</b></summary>
+<div align="center">
+  <img src="https://img.shields.io/badge/Architected_&_Engineered_By-Golla_Bhargava_Teja-000000?style=for-the-badge&logo=github&logoColor=white" />
+</div>
 
-```text
-kairos/
-├── 📄 README.md                # Project documentation (You are here!)
-├── 📄 docker-compose.yml       # Local multi-service orchestration
-├── 📄 .env.example             # Environment variable template
-├── 📁 app/                     # Backend API & Intelligence Engine (FastAPI)
-│   ├── 📁 api/                 # REST endpoints (incidents, deployments, search, health)
-│   ├── 📁 services/            # Core integration logic (GitHub, K8s, Prometheus, Loki)
-│   ├── 📁 ai/                  # Groq LLM summarizer, embedding generator & prompt templates
-│   ├── 📁 database/            # SQLAlchemy models, CRUD operations & migrations
-│   └── 📁 utils/               # Configuration loading & custom logging
-├── 📁 frontend/                # SPA Dashboard (React)
-│   ├── 📁 src/                 # Components, Pages, State management & API clients
-│   └── 📄 package.json         # Frontend dependencies & build scripts
-├── 📁 deployment/              # Infrastructure & CI/CD manifests
-│   ├── 📁 docker/              # Dockerfiles & container optimization configs
-│   ├── 📁 kubernetes/          # K8s Deployments, Services, ConfigMaps & Secrets
-│   └── 📁 github-actions/      # CI/CD pipeline definitions (`ci-cd.yaml`)
-├── 📁 monitoring/              # Observability stack configurations
-│   ├── 📁 prometheus/          # Scrape configs & alerting rules (`prometheus.yml`)
-│   ├── 📁 grafana/             # Auto-provisioned datasources & dashboards
-│   └── 📁 loki/                # Log storage & chunking rules (`loki-config.yml`)
-├── 📁 sample-apps/             # Test targets for generating telemetry
-│   ├── 📁 healthy-app/         # Baseline functioning microservice
-│   └── 📁 broken-app/          # Intentionally buggy app for incident simulation
-├── 📁 sample-incidents/        # Pre-packaged disaster scenarios (OOM, CrashLoop, Timeout)
-├── 📁 docs/                    # Architectural deep-dives & project specifications
-└── 📁 scripts/                 # Automated bootstrap & cluster cleanup utilities
-```
-
-</details>
-
----
-
-## 🎯 Verification & Success Criteria
-
-When testing or deploying KAIROS, verify the platform passes the following end-to-end operational checklist:
-
-- [x] **CI/CD Build Automation:** GitHub Actions workflow successfully lints, builds, and pushes Docker images.
-- [x] **Vulnerability Scanning:** Trivy evaluates container layers without reporting blocking critical CVEs.
-- [x] **Cluster Orchestration:** k3d cluster initializes with healthy pods across all service tiers.
-- [x] **Telemetry Collection:** Prometheus actively scrapes pod metrics; Loki receives real-time container stdout/stderr logs.
-- [x] **Automated Incident Capture:** Simulated pod crashes (e.g., `OOMKilled` or `CrashLoopBackOff`) automatically generate an incident record.
-- [x] **AI Summarization:** Groq LLM evaluates the failure trace and populates the root cause summary within seconds.
-- [x] **Vector Similarity Retrieval:** `pgvector` accurately matches synthetic duplicate incidents with similarity scores $> 85\%$.
-- [x] **UI Rendering:** React dashboard renders real-time timeline updates without manual page refreshes.
-
----
-
-## 🔒 Security Best Practices
-
-- **Zero Hardcoded Secrets:** All API keys, database credentials, and webhook tokens are injected strictly via `.env` files or Kubernetes Secrets.
-- **Pipeline Gatekeeping:** Integrated Trivy container scanning ensures vulnerable base images are flagged before production deployment.
-- **Least Privilege Access:** Kubernetes ServiceAccounts and Role-Based Access Control (RBAC) limit telemetry scraping strictly to required namespaces.
-
----
-
-## 🤝 Contributing
+<br/>
 
 We welcome contributions from developers, DevOps engineers, and SREs! 
-
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
@@ -318,6 +259,5 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ---
 
 <div align="center">
-  <p>Built with ❤️ for modern SRE & DevOps teams.</p>
-  <p><b>KAIROS</b> — <i>Never solve the same incident twice.</i></p>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer" width="100%" />
 </div>

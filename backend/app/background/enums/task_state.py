@@ -1,0 +1,14 @@
+from enum import Enum
+
+class TaskState(str, Enum):
+    CREATED = "CREATED"
+    QUEUED = "QUEUED"
+    RUNNING = "RUNNING"
+    WAITING = "WAITING"
+    RETRYING = "RETRYING"
+    PAUSED = "PAUSED"
+    COMPLETED = "COMPLETED"
+    FAILED = "FAILED"
+    CANCELLED = "CANCELLED"
+    EXPIRED = "EXPIRED"
+    DEAD_LETTER = "DEAD_LETTER"
