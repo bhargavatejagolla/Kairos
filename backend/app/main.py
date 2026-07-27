@@ -5,6 +5,7 @@ from app.api.v1 import auth, organizations, permissions, ping, projects, roles, 
 from app.container.application import container
 from app.core.lifespan import lifespan
 from app.middleware.request_id import RequestIDMiddleware
+from app.middleware.correlation import CorrelationIdMiddleware
 
 app = FastAPI(
     title=container.settings.app_name,
@@ -14,6 +15,7 @@ app = FastAPI(
 )
 
 app.add_middleware(RequestIDMiddleware)
+app.add_middleware(CorrelationIdMiddleware)
 register_exception_handlers(app)
 
 
@@ -40,6 +42,10 @@ app.include_router(
 app.include_router(
     projects.router, prefix="/api/v1/organizations/{slug}/projects", tags=["Projects"]
 )
+
+# Phase 14: Enterprise Audit Platform
+from app.api.v1.audit import router as audit_router
+app.include_router(audit_router, prefix="/api/v1/audit")
 
 # AI Routes
 from app.api.ai import (

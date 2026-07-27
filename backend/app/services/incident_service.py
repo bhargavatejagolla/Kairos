@@ -107,6 +107,28 @@ class IncidentService:
             {"title": data.title}
         )
         
+        # Transactional Outbox for Domain Events
+        from app.events.outbox_service import OutboxService
+        from app.events.schema import DomainEvent
+        from app.middleware.correlation import correlation_id_var
+        
+        outbox = OutboxService(self.session)
+        event = DomainEvent(
+            event_type="IncidentCreated",
+            organization_id=str(context.organization_id),
+            project_id=str(context.project_id),
+            resource_type="INCIDENT",
+            resource_id=str(incident.id),
+            actor_id=str(created_by) if created_by else None,
+            correlation_id=correlation_id_var.get(None),
+            payload={
+                "title": data.title,
+                "priority": "P1",
+                "assigned_to": str(incident.assigned_to) if hasattr(incident, "assigned_to") and incident.assigned_to else None
+            }
+        )
+        await outbox.save_event(event)
+        
         return incident
 
     async def update_status(self, incident: Incident, target_status: IncidentStatus, updated_by: UUID) -> Incident:

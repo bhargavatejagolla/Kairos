@@ -87,7 +87,12 @@ __all__ = [
     "TaskSchedule",
     "WorkerNode",
     "TaskLog",
-    "DeadLetterTask"
+    "DeadLetterTask",
+    "Notification",
+    "EmailTemplate",
+    "NotificationPreference",
+    "NotificationDelivery",
+    "NotificationAudit"
 ]
 
 # Phase 12 Models
@@ -97,3 +102,38 @@ from app.background.models.schedule import TaskSchedule
 from app.background.models.worker import WorkerNode
 from app.background.models.task_log import TaskLog
 from app.background.models.dead_letter import DeadLetterTask
+
+# Phase 13 Models
+from app.notifications.models import (
+    Notification,
+    EmailTemplate,
+    NotificationPreference,
+    NotificationDelivery,
+    NotificationAudit
+)
+
+# Phase 14 Models
+from app.audit.models import (
+    AuditLog,
+    AuditActor,
+    AuditTarget,
+    AuditChange,
+    AuditMetadata,
+    AuditAttachment,
+    AuditExport,
+    AuditRetentionPolicy
+)
+
+from app.events.models import EventOutbox
+
+__all__.extend([
+    "AuditLog",
+    "AuditActor",
+    "AuditTarget",
+    "AuditChange",
+    "AuditMetadata",
+    "AuditAttachment",
+    "AuditExport",
+    "AuditRetentionPolicy",
+    "EventOutbox"
+])

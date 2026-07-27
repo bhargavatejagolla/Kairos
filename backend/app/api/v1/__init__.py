@@ -18,6 +18,7 @@ from .policies import router as policies_router
 from .silences import router as silences_router
 from .maintenance import router as maintenance_router
 from .background import router as background_router
+from .notifications import router as notifications_router
 
 routers = [
     ping_router,
@@ -40,4 +41,5 @@ routers = [
     silences_router,
     maintenance_router,
     background_router,
+    notifications_router,
 ]

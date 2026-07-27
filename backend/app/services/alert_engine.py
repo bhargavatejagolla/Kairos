@@ -68,6 +68,28 @@ class AlertEngine:
         
         await self.session.commit()
         await self.session.refresh(alert)
+        
+        # Transactional Outbox for Domain Events
+        from app.events.outbox_service import OutboxService
+        from app.events.schema import DomainEvent
+        from app.middleware.correlation import correlation_id_var
+        
+        outbox = OutboxService(self.session)
+        event = DomainEvent(
+            event_type="AlertTriggered",
+            organization_id=str(organization_id),
+            project_id=str(project_id),
+            resource_type="ALERT",
+            resource_id=str(alert.id),
+            actor_id="SYSTEM",
+            correlation_id=correlation_id_var.get(None),
+            payload={
+                "title": alert.title,
+                "severity": alert.severity.value,
+            }
+        )
+        await outbox.save_event(event)
+        
         return alert
 
     async def acknowledge(self, alert_id: UUID) -> Alert:

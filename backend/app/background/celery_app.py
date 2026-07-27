@@ -23,4 +23,4 @@ celery_app.conf.update(
 )
 
 # Autodiscover tasks from all standard modules
-celery_app.autodiscover_tasks(['app.background'])
+celery_app.autodiscover_tasks(['app.background', 'app.notifications', 'app.events'])

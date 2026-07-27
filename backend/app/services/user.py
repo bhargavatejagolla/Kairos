@@ -57,7 +57,33 @@ class UserService:
             hashed_password=hashed_pw,
             is_active=True,
         )
-        return await self.repository.create(user_obj)
+        user_created = await self.repository.create(user_obj)
+        
+        # Transactional Outbox for Domain Events
+        from app.events.outbox_service import OutboxService
+        from app.events.schema import DomainEvent
+        from app.middleware.correlation import correlation_id_var
+        
+        # In user.py we might not have self.session explicitly, let's check
+        # self.repository.session is available for sqlalchemy repos
+        session = getattr(self.repository, "session", None)
+        if session:
+            outbox = OutboxService(session)
+            event = DomainEvent(
+                event_type="UserRegistered",
+                resource_type="USER",
+                resource_id=str(user_created.id),
+                actor_id=str(user_created.id),
+                correlation_id=correlation_id_var.get(None),
+                payload={
+                    "email": user_created.email,
+                    "username": user_created.username,
+                    "full_name": user_created.full_name
+                }
+            )
+            await outbox.save_event(event)
+        
+        return user_created
 
     async def update_user(self, user_id: UUID, user_in: UserUpdate) -> User:
         user = await self.get_user(user_id)
