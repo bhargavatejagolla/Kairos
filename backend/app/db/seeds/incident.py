@@ -95,4 +95,7 @@ async def seed_incident_domain(session: AsyncSession) -> None:
     session.add_all([timeline_1, timeline_2])
     await session.commit()
     
+    from app.db.seeds.alert_seeds import seed_alerts
+    await seed_alerts(session, payment_api.id)
+    
     print(f"Incident Domain seeded successfully. Created incident {incident.number} for service {payment_api.name}.")

@@ -11,6 +11,12 @@ from .timelines import router as timelines_router
 from .statistics import router as statistics_router
 from .comments import router as comments_router
 from .attachments import router as attachments_router
+from .signals import router as signals_router
+from .alerts import router as alerts_router
+from .alert_rules import router as alert_rules_router
+from .policies import router as policies_router
+from .silences import router as silences_router
+from .maintenance import router as maintenance_router
 
 routers = [
     ping_router,
@@ -26,4 +32,10 @@ routers = [
     statistics_router,
     comments_router,
     attachments_router,
+    signals_router,
+    alerts_router,
+    alert_rules_router,
+    policies_router,
+    silences_router,
+    maintenance_router,
 ]
