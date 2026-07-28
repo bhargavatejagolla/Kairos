@@ -23,4 +23,31 @@ celery_app.conf.update(
 )
 
 # Autodiscover tasks from all standard modules
-celery_app.autodiscover_tasks(['app.background', 'app.notifications', 'app.events'])
+celery_app.autodiscover_tasks(['app.background', 'app.notifications', 'app.events', 'app.audit'])
+
+from celery.signals import task_prerun, task_postrun
+import structlog
+import uuid
+from app.middleware.correlation import correlation_id_var
+
+# Instrument Celery for OpenTelemetry
+from opentelemetry.instrumentation.celery import CeleryInstrumentor
+CeleryInstrumentor().instrument()
+
+@task_prerun.connect
+def setup_structlog_context(task_id, task, *args, **kwargs):
+    # Try to extract correlation_id from kwargs, or generate a new one
+    req_kwargs = kwargs.get('kwargs', {})
+    correlation_id = req_kwargs.get('correlation_id') or str(uuid.uuid4())
+    
+    correlation_id_var.set(correlation_id)
+    structlog.contextvars.bind_contextvars(
+        correlation_id=correlation_id,
+        celery_task_id=task_id,
+        celery_task_name=task.name
+    )
+
+@task_postrun.connect
+def teardown_structlog_context(*args, **kwargs):
+    structlog.contextvars.clear_contextvars()
+

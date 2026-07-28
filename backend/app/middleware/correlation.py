@@ -3,6 +3,7 @@ from starlette.requests import Request
 from starlette.responses import Response
 import uuid
 import contextvars
+import structlog
 
 # Global contextvar to hold the correlation ID for the current request
 correlation_id_var: contextvars.ContextVar[str] = contextvars.ContextVar('correlation_id', default=None)
@@ -17,8 +18,15 @@ class CorrelationIdMiddleware(BaseHTTPMiddleware):
         # Set it in the contextvar for this request
         correlation_id_var.set(correlation_id)
         
+        # Bind it to structlog so every log in this request includes the correlation_id
+        structlog.contextvars.bind_contextvars(correlation_id=correlation_id)
+        
         response = await call_next(request)
         
         # Include it in the response
         response.headers["X-Correlation-ID"] = correlation_id
+        
+        # Clear structlog contextvars for the next request
+        structlog.contextvars.clear_contextvars()
+        
         return response

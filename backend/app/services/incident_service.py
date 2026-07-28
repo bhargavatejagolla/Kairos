@@ -97,6 +97,13 @@ class IncidentService:
             metadata={"source": data.source.value}
         )
         
+        # 4. Increment business metric
+        from app.core.metrics import incidents_created_total
+        incidents_created_total.labels(
+            organization_id=str(context.organization_id),
+            severity=data.severity.value
+        ).inc()
+        
         # Trigger workflow
         await self.workflow.process_transition(
             "Incident", 

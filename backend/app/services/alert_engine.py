@@ -90,6 +90,14 @@ class AlertEngine:
         )
         await outbox.save_event(event)
         
+        # Increment metric
+        from app.core.metrics import alerts_triggered_total
+        alerts_triggered_total.labels(
+            organization_id=str(organization_id),
+            source="evaluation_engine"
+        ).inc()
+
+        
         return alert
 
     async def acknowledge(self, alert_id: UUID) -> Alert:

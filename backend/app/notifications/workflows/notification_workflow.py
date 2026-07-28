@@ -50,6 +50,13 @@ class NotificationWorkflow:
         # 4. Queue Background Job
         await self.queue(notification.id)
         
+        # 5. Increment Metric
+        from app.core.metrics import notifications_sent_total
+        notifications_sent_total.labels(
+            organization_id=str(notification_in.organization_id),
+            channel=notification_in.channel.value
+        ).inc()
+        
         return notification
 
     async def queue(self, notification_id: UUID):

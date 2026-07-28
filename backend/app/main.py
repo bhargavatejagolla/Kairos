@@ -1,4 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from prometheus_client import make_asgi_app
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+import time
 
 from app.api.exception_handlers import register_exception_handlers
 from app.api.v1 import auth, organizations, permissions, ping, projects, roles, users
@@ -6,6 +9,11 @@ from app.container.application import container
 from app.core.lifespan import lifespan
 from app.middleware.request_id import RequestIDMiddleware
 from app.middleware.correlation import CorrelationIdMiddleware
+from app.core.metrics import http_requests_total, http_request_duration_seconds
+from app.core.tracing import configure_tracing
+
+# Configure tracing for the application
+configure_tracing()
 
 app = FastAPI(
     title=container.settings.app_name,
@@ -13,6 +21,34 @@ app = FastAPI(
     description="AI-Powered DevOps Incident Intelligence Platform",
     lifespan=lifespan,
 )
+
+# Instrument FastAPI for distributed tracing
+FastAPIInstrumentor.instrument_app(app)
+
+# Metrics Middleware
+@app.middleware("http")
+async def track_metrics(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    duration = time.time() - start_time
+    
+    # Avoid tracking the metrics endpoint itself
+    if request.url.path != "/metrics":
+        http_requests_total.labels(
+            method=request.method, 
+            endpoint=request.url.path, 
+            status=response.status_code
+        ).inc()
+        http_request_duration_seconds.labels(
+            method=request.method, 
+            endpoint=request.url.path
+        ).observe(duration)
+        
+    return response
+
+# Prometheus Exporter Endpoint
+metrics_app = make_asgi_app()
+app.mount("/metrics", metrics_app)
 
 app.add_middleware(RequestIDMiddleware)
 app.add_middleware(CorrelationIdMiddleware)

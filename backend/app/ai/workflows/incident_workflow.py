@@ -16,6 +16,13 @@ class IncidentWorkflow:
         # 2. Gather Recommendations
         rec_res = await self.recommendation_agent.run(context)
         
+        # 3. Increment Metric
+        from app.core.metrics import ai_resolutions_total
+        ai_resolutions_total.labels(
+            organization_id="unknown", # Would need DB lookup for real org ID
+            action_type="incident_analysis"
+        ).inc()
+        
         return {
             "incident_id": incident_id,
             "root_cause": root_cause_res,

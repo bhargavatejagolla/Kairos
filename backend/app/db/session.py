@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine,
 )
+from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
 
 from app.core.config import settings
 
@@ -10,6 +11,11 @@ engine = create_async_engine(
     settings.database_url,
     echo=settings.database_echo,
     pool_pre_ping=True,
+)
+
+# Instrument the underlying synchronous engine
+SQLAlchemyInstrumentor().instrument(
+    engine=engine.sync_engine
 )
 
 SessionLocal = async_sessionmaker(
