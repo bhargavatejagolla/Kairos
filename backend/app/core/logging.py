@@ -15,7 +15,7 @@ def configure_logging() -> None:
     ]
 
     # 2. Environment-aware rendering
-    if settings.env == "production":
+    if settings.app_env == "production":
         processors.append(structlog.processors.JSONRenderer())
     else:
         processors.append(structlog.dev.ConsoleRenderer(colors=True))
