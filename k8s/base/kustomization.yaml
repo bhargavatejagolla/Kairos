@@ -2,14 +2,21 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - namespace.yaml
-  - configmap.yaml
-  - postgres/postgres.yaml
-  - redis/redis.yaml
-  - backend/backend.yaml
-  - worker/worker.yaml
-  - beat/beat.yaml
-  - frontend/frontend.yaml
-  - ingress/ingress.yaml
-  - ../networkpolicy/default-deny.yaml
-  - ../networkpolicy/allow-internal.yaml
+- namespace.yaml
+- configmap.yaml
+- postgres/postgres.yaml
+- redis/redis.yaml
+- backend/backend.yaml
+- worker/worker.yaml
+- beat/beat.yaml
+- frontend/frontend.yaml
+- ingress/ingress.yaml
+- networkpolicy/default-deny.yaml
+- networkpolicy/allow-internal.yaml
+images:
+- name: kairos-api
+  newName: kairos-api
+  newTag: 985df64
+- name: kairos-app
+  newName: kairos-app
+  newTag: 985df64

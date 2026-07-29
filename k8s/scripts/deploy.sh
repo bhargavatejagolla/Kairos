@@ -26,11 +26,22 @@ kubectl create secret generic kairos-secrets \
     --from-env-file=$ENV_FILE \
     --dry-run=client -o yaml | kubectl apply -f -
 
+# Ensure kustomize is available
+if command -v kustomize &> /dev/null; then
+    KUSTOMIZE_CMD="kustomize"
+elif [ -x "$(pwd)/kustomize" ]; then
+    KUSTOMIZE_CMD="$(pwd)/kustomize"
+else
+    echo "kustomize not found. Downloading it locally..."
+    curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+    KUSTOMIZE_CMD="$(pwd)/kustomize"
+fi
+
 # Update Kustomize image tags
 echo "Setting image tags in Kustomize..."
 cd k8s/base
-kustomize edit set image kairos-api=kairos-api:$IMAGE_TAG
-kustomize edit set image kairos-app=kairos-app:$IMAGE_TAG
+$KUSTOMIZE_CMD edit set image kairos-api=kairos-api:$IMAGE_TAG
+$KUSTOMIZE_CMD edit set image kairos-app=kairos-app:$IMAGE_TAG
 cd ../..
 
 # Apply the Kustomize overlay
