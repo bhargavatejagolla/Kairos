@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ShieldAlert, Activity, CheckCircle, Clock, Send, MessageSquare } from "lucide-react";
+import { Activity, Clock, Send, MessageSquare } from "lucide-react";
 import { format } from "date-fns";
 import { useState } from "react";
 

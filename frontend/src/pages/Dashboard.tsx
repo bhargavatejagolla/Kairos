@@ -3,7 +3,7 @@ import { useIncidents } from "@/hooks/useIncidents";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity, ShieldAlert, CheckCircle, Clock } from "lucide-react";
 import { 
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart 
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart 
 } from "recharts";
 import { format, subDays } from "date-fns";
 
