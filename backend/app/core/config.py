@@ -7,16 +7,16 @@ ROOT_DIR = Path(__file__).resolve().parents[3]
 
 
 class Settings(BaseSettings):
-    app_name: str
-    app_version: str
-    app_env: str
-    log_level: str
+    app_name: str = "KAIROS"
+    app_version: str = "1.0.0"
+    app_env: str = "development"
+    log_level: str = "INFO"
 
-    database_host: str
-    database_port: int
-    database_name: str
-    database_user: str
-    database_password: str
+    database_host: str = "localhost"
+    database_port: int = 5432
+    database_name: str = "kairos_db"
+    database_user: str = "kairos_user"
+    database_password: str = "kairos_password"
     database_echo: bool = False
 
     jwt_secret_key: str = (
