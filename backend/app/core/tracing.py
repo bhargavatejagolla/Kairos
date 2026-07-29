@@ -9,6 +9,8 @@ from app.core.config import settings
 
 def configure_tracing() -> None:
     """Configures the global OpenTelemetry tracer provider."""
+    if not settings.enable_tracing:
+        return
     
     # 1. Define Resource attributes (metadata for traces)
     resource = Resource(attributes={

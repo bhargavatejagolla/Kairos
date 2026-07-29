@@ -78,3 +78,9 @@ Jinja2==3.1.4
 aiosmtplib==3.0.1
 prometheus-client==0.20.0
 prometheus-fastapi-instrumentator==7.0.0
+opentelemetry-instrumentation-fastapi
+opentelemetry-instrumentation-sqlalchemy
+opentelemetry-instrumentation-celery
+opentelemetry-exporter-otlp
+pytest-asyncio
+setuptools<70.0.0

@@ -9,7 +9,30 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: kairos_user
+          POSTGRES_PASSWORD: kairos_password
+          POSTGRES_DB: kairos_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,6 +49,14 @@ jobs:
           pip install -r requirements.txt
           
       - name: Run Backend Tests
+        env:
+          DATABASE_HOST: localhost
+          DATABASE_PORT: 5432
+          DATABASE_NAME: kairos_db
+          DATABASE_USER: kairos_user
+          DATABASE_PASSWORD: kairos_password
+          REDIS_URL: redis://localhost:6379/0
+          ENABLE_TRACING: "false"
         run: |
           cd backend
           pytest
