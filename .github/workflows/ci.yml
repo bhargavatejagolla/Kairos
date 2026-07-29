@@ -50,6 +50,10 @@ jobs:
           
       - name: Run Backend Tests
         env:
+          APP_NAME: KAIROS
+          APP_VERSION: 1.0.0
+          APP_ENV: testing
+          LOG_LEVEL: DEBUG
           DATABASE_HOST: localhost
           DATABASE_PORT: 5432
           DATABASE_NAME: kairos_db
