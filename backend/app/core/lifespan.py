@@ -32,6 +32,16 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
     yield
 
+    import app.main as main_app
+    import asyncio
+    
+    logger.info("Initiating graceful shutdown...")
+    # 1. Mark readiness probe as failed so K8s stops sending new traffic
+    main_app.is_shutting_down = True
+    
+    # 2. Wait for current requests to finish (Kubernetes grace period buffer)
+    await asyncio.sleep(5)
+    
     logger.info(
         "application_shutdown",
         application=settings.app_name,

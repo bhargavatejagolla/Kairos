@@ -60,9 +60,30 @@ async def root() -> dict[str, str]:
     return {"message": "Welcome to KAIROS API"}
 
 
-@app.get("/health")
-async def health() -> dict[str, str]:
+# Kubernetes Probes
+import asyncio
+
+# A simple flag to determine if the app is shutting down
+is_shutting_down = False
+
+@app.get("/live", tags=["Health"])
+async def live() -> dict[str, str]:
+    """Liveness probe: Determines if the container is running and not deadlocked."""
     return {"status": "ok"}
+
+@app.get("/ready", tags=["Health"])
+async def ready() -> dict[str, str]:
+    """Readiness probe: Determines if the app is ready to accept traffic."""
+    if is_shutting_down:
+        from fastapi import Response, status
+        return Response(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, content="Shutting down")
+    # In a real app, you might check DB connection here
+    return {"status": "ok"}
+
+@app.get("/health", tags=["Health"])
+async def health() -> dict[str, str]:
+    """General health endpoint for external monitoring."""
+    return {"status": "ok", "version": container.settings.app_version}
 
 
 app.include_router(ping.router, prefix="/api/v1", tags=["Ping"])
