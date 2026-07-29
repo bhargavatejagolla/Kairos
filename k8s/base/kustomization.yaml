@@ -6,3 +6,10 @@ resources:
   - configmap.yaml
   - postgres/postgres.yaml
   - redis/redis.yaml
+  - backend/backend.yaml
+  - worker/worker.yaml
+  - beat/beat.yaml
+  - frontend/frontend.yaml
+  - ingress/ingress.yaml
+  - ../networkpolicy/default-deny.yaml
+  - ../networkpolicy/allow-internal.yaml

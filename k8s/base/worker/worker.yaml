@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: kairos
+  labels:
+    app: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        fsGroup: 999
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:17
+          command:
+            - sh
+            - -c
+            - |
+              until pg_isready -h postgres -p 5432 -U $POSTGRES_USER -d $POSTGRES_DB; do
+                echo "Waiting for PostgreSQL..."
+                sleep 2
+              done
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: kairos-secrets
+                  key: DATABASE_NAME
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: kairos-secrets
+                  key: DATABASE_USER
+        - name: wait-for-redis
+          image: redis:7-alpine
+          command:
+            - sh
+            - -c
+            - |
+              until redis-cli -h redis ping; do
+                echo "Waiting for Redis..."
+                sleep 2
+              done
+      containers:
+        - name: worker
+          image: kairos-api:latest
+          imagePullPolicy: IfNotPresent
+          command: ["celery", "-A", "app.background.celery_app", "worker", "--loglevel=info"]
+          envFrom:
+            - configMapRef:
+                name: kairos-config
+            - secretRef:
+                name: kairos-secrets
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
