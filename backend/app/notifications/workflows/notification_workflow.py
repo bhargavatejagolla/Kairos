@@ -1,15 +1,16 @@
 from uuid import UUID
-from sqlalchemy.ext.asyncio import AsyncSession
-import structlog
 
-from app.notifications.services.notification_service import NotificationService
-from app.notifications.services.template_service import TemplateService
-from app.notifications.services.preference_service import PreferenceService
-from app.notifications.schemas.notification import NotificationCreate
-from app.notifications.enums.status import NotificationStatus
-from app.notifications.models.notification import Notification
+import structlog
+from sqlalchemy.ext.asyncio import AsyncSession
+
 # We import background tasks to enqueue the email job
 from app.background.celery_app import celery_app
+from app.notifications.enums.status import NotificationStatus
+from app.notifications.models.notification import Notification
+from app.notifications.schemas.notification import NotificationCreate
+from app.notifications.services.notification_service import NotificationService
+from app.notifications.services.preference_service import PreferenceService
+from app.notifications.services.template_service import TemplateService
 
 logger = structlog.get_logger(__name__)
 

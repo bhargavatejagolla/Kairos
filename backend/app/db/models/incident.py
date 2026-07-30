@@ -1,11 +1,15 @@
-from uuid import UUID
-from datetime import datetime
-from sqlalchemy import Column, String, ForeignKey, Enum, DateTime, Index
+from sqlalchemy import Column, DateTime, Enum, ForeignKey, Index, String
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin
-from app.db.models.enums import IncidentStatus, IncidentSeverity, IncidentPriority, IncidentSource
+from app.db.models.enums import (
+    IncidentPriority,
+    IncidentSeverity,
+    IncidentSource,
+    IncidentStatus,
+)
+from app.db.models.mixins import AuditMixin, TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class Incident(Base, UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin):
     __tablename__ = "incidents"

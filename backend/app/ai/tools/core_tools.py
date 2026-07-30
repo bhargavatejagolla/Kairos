@@ -1,5 +1,7 @@
-from typing import Any, Dict
+from typing import Any
+
 from app.ai.tools.base import BaseTool
+
 
 class IncidentTool(BaseTool):
     @property
@@ -10,7 +12,7 @@ class IncidentTool(BaseTool):
     def description(self) -> str:
         return "Fetches details and timeline for a specific incident."
         
-    async def execute(self, incident_id: str, **kwargs) -> Dict[str, Any]:
+    async def execute(self, incident_id: str, **kwargs) -> dict[str, Any]:
         # Stub implementation
         return {"incident_id": incident_id, "status": "INVESTIGATING", "timeline": []}
 
@@ -23,7 +25,7 @@ class AlertTool(BaseTool):
     def description(self) -> str:
         return "Fetches details for a specific alert."
         
-    async def execute(self, alert_id: str, **kwargs) -> Dict[str, Any]:
+    async def execute(self, alert_id: str, **kwargs) -> dict[str, Any]:
         return {"alert_id": alert_id, "status": "FIRING"}
 
 class MetricsTool(BaseTool):
@@ -35,7 +37,7 @@ class MetricsTool(BaseTool):
     def description(self) -> str:
         return "Fetches recent metrics for a given service."
         
-    async def execute(self, service_id: str, **kwargs) -> Dict[str, Any]:
+    async def execute(self, service_id: str, **kwargs) -> dict[str, Any]:
         return {"service_id": service_id, "cpu": "95%", "memory": "80%"}
 
 class LogsTool(BaseTool):
@@ -47,5 +49,5 @@ class LogsTool(BaseTool):
     def description(self) -> str:
         return "Fetches recent error logs for a service."
         
-    async def execute(self, service_id: str, **kwargs) -> Dict[str, Any]:
+    async def execute(self, service_id: str, **kwargs) -> dict[str, Any]:
         return {"service_id": service_id, "logs": ["[ERROR] Connection refused"]}

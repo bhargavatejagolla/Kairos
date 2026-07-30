@@ -1,5 +1,7 @@
-from sqlalchemy import Column, String, Float, Integer, DateTime
+from sqlalchemy import Column, DateTime, Float, Integer, String
+
 from app.db.models.base import BaseModel
+
 
 class WorkerNode(BaseModel):
     __tablename__ = "worker_nodes"

@@ -1,8 +1,9 @@
-from sqlalchemy import Column, String, ForeignKey, DateTime, JSON
+from sqlalchemy import JSON, Column, DateTime, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin
+from app.db.models.mixins import AuditMixin, TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class Silence(Base, UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin):
     __tablename__ = "silences"

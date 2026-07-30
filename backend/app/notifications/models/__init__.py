@@ -1,13 +1,13 @@
-from .notification import Notification
-from .template import EmailTemplate
-from .preference import NotificationPreference
-from .delivery import NotificationDelivery
 from .audit import NotificationAudit
+from .delivery import NotificationDelivery
+from .notification import Notification
+from .preference import NotificationPreference
+from .template import EmailTemplate
 
 __all__ = [
-    "Notification",
     "EmailTemplate",
-    "NotificationPreference",
+    "Notification",
+    "NotificationAudit",
     "NotificationDelivery",
-    "NotificationAudit"
+    "NotificationPreference"
 ]

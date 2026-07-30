@@ -1,6 +1,9 @@
-from typing import Optional, Dict, Any, List
+from typing import Any
+
 from pydantic import BaseModel
+
 from app.db.models.enums import AlertSeverity
+
 
 class EvaluationResult(BaseModel):
     triggered: bool
@@ -9,5 +12,5 @@ class EvaluationResult(BaseModel):
     fingerprint: str
     title: str
     message: str
-    metadata_: Optional[Dict[str, Any]] = None
-    matched_conditions: List[Dict[str, Any]]
+    metadata_: dict[str, Any] | None = None
+    matched_conditions: list[dict[str, Any]]

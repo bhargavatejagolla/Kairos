@@ -1,11 +1,12 @@
-from fastapi import APIRouter, Depends, status
 from typing import Annotated
 
-from app.api.deps.incident import IncidentDep
+from fastapi import APIRouter, Depends
+
 from app.api.deps.authorization import require_incident_permission
+from app.api.deps.incident import IncidentDep
+from app.api.deps.services import get_timeline_service
 from app.core.permissions import Permission
 from app.schemas.timeline import TimelineEntryResponse
-from app.api.deps.services import get_timeline_service
 from app.services.timeline_service import TimelineService
 
 router = APIRouter(tags=["Timelines"])

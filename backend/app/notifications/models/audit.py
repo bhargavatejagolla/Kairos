@@ -1,9 +1,11 @@
 from datetime import datetime
 from uuid import UUID
+
+from sqlalchemy import JSON, DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, ForeignKey, DateTime, JSON
 
 from app.db.models.base import BaseModel
+
 
 class NotificationAudit(BaseModel):
     __tablename__ = "notification_audits"

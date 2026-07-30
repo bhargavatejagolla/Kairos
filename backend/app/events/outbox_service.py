@@ -1,12 +1,13 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, update
-from datetime import datetime, UTC
-import structlog
 import uuid
+from datetime import UTC, datetime
 
+import structlog
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.events.bus import event_bus
 from app.events.models import EventOutbox
 from app.events.schema import DomainEvent
-from app.events.bus import event_bus
 
 logger = structlog.get_logger(__name__)
 

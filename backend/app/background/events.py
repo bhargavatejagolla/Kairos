@@ -1,5 +1,6 @@
-from celery import bootsteps
 import logging
+
+from celery import bootsteps
 
 logger = logging.getLogger(__name__)
 

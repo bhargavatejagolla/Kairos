@@ -1,6 +1,8 @@
-from sqlalchemy import Column, String, Text, DateTime, Integer, ForeignKey, Boolean
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.dialects.postgresql import UUID
+
 from app.db.models.base import BaseModel
+
 
 class DeadLetterTask(BaseModel):
     __tablename__ = "dead_letter_tasks"

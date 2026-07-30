@@ -1,9 +1,11 @@
-from sqlalchemy import Column, String, DateTime, JSON, Boolean
-from sqlalchemy.dialects.postgresql import UUID
 import uuid
-from datetime import datetime, UTC
+from datetime import UTC, datetime
+
+from sqlalchemy import JSON, Boolean, Column, DateTime, String
+from sqlalchemy.dialects.postgresql import UUID
 
 from app.db.models.base import Base
+
 
 class EventOutbox(Base):
     """

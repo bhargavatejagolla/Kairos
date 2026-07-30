@@ -1,5 +1,4 @@
 import pytest
-from app.db.models.enums import IncidentStatus
 
 pytestmark = pytest.mark.asyncio
 

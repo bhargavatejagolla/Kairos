@@ -1,6 +1,10 @@
 from fastapi import APIRouter
+
 from app.ai.workflows.incident_workflow import IncidentWorkflow
-from app.schemas.ai.responses import RootCauseResponse, RecommendationResponse, SummaryResponse
+from app.schemas.ai.responses import (
+    RecommendationResponse,
+    RootCauseResponse,
+)
 
 router = APIRouter()
 incident_workflow = IncidentWorkflow()

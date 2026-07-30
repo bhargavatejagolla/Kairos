@@ -2,7 +2,11 @@ from sqlalchemy import String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import OrganizationOwnedModel, TimestampMixin, UUIDPrimaryKeyMixin
+from app.db.models.mixins import (
+    OrganizationOwnedModel,
+    TimestampMixin,
+    UUIDPrimaryKeyMixin,
+)
 
 
 class Environment(Base, OrganizationOwnedModel, UUIDPrimaryKeyMixin, TimestampMixin):

@@ -1,10 +1,12 @@
+from typing import Any
+
 from fastapi import APIRouter
-from typing import Dict, Any
+
 from app.background.reliability.distributed_lock import redis_client
 
 router = APIRouter(prefix="/background/health", tags=["Background System Health"])
 
-@router.get("", response_model=Dict[str, Any])
+@router.get("", response_model=dict[str, Any])
 async def check_health() -> Any:
     """
     Check the health of the background processing platform.

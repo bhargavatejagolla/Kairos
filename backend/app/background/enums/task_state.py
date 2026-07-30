@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TaskState(str, Enum):
     CREATED = "CREATED"
     QUEUED = "QUEUED"

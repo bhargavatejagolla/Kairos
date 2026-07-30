@@ -1,12 +1,12 @@
+
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
-from uuid import UUID
 
-from app.api.deps.database import get_db
 from app.api.dependencies.alert import get_alert_context
-from app.workflow.workflow_context import AlertContext
-from app.workflow.alert_workflow import AlertWorkflow
+from app.api.deps.database import get_db
 from app.schemas.signal import SignalIn, SignalOut
+from app.workflow.alert_workflow import AlertWorkflow
+from app.workflow.workflow_context import AlertContext
 
 router = APIRouter(prefix="/services/{service_id}/signals", tags=["Signals"])
 

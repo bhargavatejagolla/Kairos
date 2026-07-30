@@ -1,21 +1,20 @@
-from fastapi import APIRouter, Depends, Query, HTTPException
-from typing import Dict, Any, List
-from uuid import UUID
+from typing import Any
+
+from fastapi import APIRouter, Depends, Query
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps.auth import get_current_user
 from app.api.deps.database import get_db
-from sqlalchemy.ext.asyncio import AsyncSession
-from app.db.models.user import User
-
-from app.audit.search.search_engine import AuditSearchEngine
-from app.audit.schemas.audit import AuditLogResponse
 from app.audit.investigations.profiles import SavedInvestigationProfiles
+from app.audit.schemas.audit import AuditLogResponse
+from app.audit.search.search_engine import AuditSearchEngine
+from app.db.models.user import User
 
 router = APIRouter()
 
-@router.post("/search", response_model=List[AuditLogResponse])
+@router.post("/search", response_model=list[AuditLogResponse])
 async def search_audit_logs(
-    filters: Dict[str, Any],
+    filters: dict[str, Any],
     page: int = Query(1, ge=1),
     page_size: int = Query(50, ge=1, le=1000),
     db: AsyncSession = Depends(get_db),

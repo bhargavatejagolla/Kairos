@@ -1,8 +1,9 @@
-from sqlalchemy import Column, String, ForeignKey, Boolean, Integer
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin
+from app.db.models.mixins import AuditMixin, TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class AlertPolicy(Base, UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin):
     __tablename__ = "alert_policies"

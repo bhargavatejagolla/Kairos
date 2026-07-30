@@ -1,4 +1,3 @@
-from celery.schedules import crontab
 
 # Defined schedules for Beat
 CELERY_BEAT_SCHEDULE = {

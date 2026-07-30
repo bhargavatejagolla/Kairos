@@ -1,19 +1,17 @@
 import logging
-from typing import List, Optional
-from uuid import UUID
 from datetime import datetime, timezone
+from uuid import UUID
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.alert import Alert
-from app.db.models.alert_rule import AlertRule
 from app.db.models.enums import AlertStatus
 from app.repositories.alert import AlertRepository
-from app.repositories.alert_rule import AlertRuleRepository
-from app.services.silence_engine import SilenceEngine
-from app.services.maintenance_engine import MaintenanceEngine
-from app.services.correlation_engine import CorrelationEngine
-from app.services.policy_engine import PolicyEngine
 from app.schemas.evaluation import EvaluationResult
+from app.services.correlation_engine import CorrelationEngine
+from app.services.maintenance_engine import MaintenanceEngine
+from app.services.policy_engine import PolicyEngine
+from app.services.silence_engine import SilenceEngine
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +27,7 @@ class AlertEngine:
         self.correlation_engine = CorrelationEngine(session)
         self.policy_engine = PolicyEngine(session)
 
-    async def process_evaluation(self, organization_id: UUID, project_id: UUID, service_id: UUID, result: EvaluationResult) -> Optional[Alert]:
+    async def process_evaluation(self, organization_id: UUID, project_id: UUID, service_id: UUID, result: EvaluationResult) -> Alert | None:
         if not result.triggered:
             return None
             

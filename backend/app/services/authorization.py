@@ -1,8 +1,6 @@
-from uuid import UUID
 
 from app.core.exceptions import PermissionDeniedError
 from app.core.organization_context import OrganizationContext
-from app.db.models.user import User
 
 
 class AuthorizationService:

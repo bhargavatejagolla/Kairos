@@ -1,10 +1,13 @@
-from uuid import UUID
 from datetime import datetime
-from typing import Optional, Any
+from typing import Any
+from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict
-from app.background.enums.task_state import TaskState
-from app.background.enums.task_priority import TaskPriority
+
 from app.background.enums.task_category import TaskCategory
+from app.background.enums.task_priority import TaskPriority
+from app.background.enums.task_state import TaskState
+
 
 class BackgroundTaskBase(BaseModel):
     task_name: str
@@ -13,10 +16,10 @@ class BackgroundTaskBase(BaseModel):
     priority: TaskPriority = TaskPriority.NORMAL
 
 class BackgroundTaskCreate(BackgroundTaskBase):
-    organization_id: Optional[UUID] = None
-    project_id: Optional[UUID] = None
-    created_by: Optional[UUID] = None
-    request_id: Optional[str] = None
+    organization_id: UUID | None = None
+    project_id: UUID | None = None
+    created_by: UUID | None = None
+    request_id: str | None = None
 
 class BackgroundTaskResponse(BackgroundTaskBase):
     model_config = ConfigDict(from_attributes=True)
@@ -26,8 +29,8 @@ class BackgroundTaskResponse(BackgroundTaskBase):
     current_step: int
     total_steps: int
     retry_count: int
-    worker: Optional[str]
-    started_at: Optional[datetime]
-    completed_at: Optional[datetime]
-    duration: Optional[float]
-    result: Optional[Any]
+    worker: str | None
+    started_at: datetime | None
+    completed_at: datetime | None
+    duration: float | None
+    result: Any | None

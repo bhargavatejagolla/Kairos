@@ -1,9 +1,11 @@
-from sqlalchemy import Column, String, ForeignKey, DateTime
-from sqlalchemy.dialects.postgresql import UUID
 import uuid
-from datetime import datetime, UTC
+from datetime import UTC, datetime
+
+from sqlalchemy import Column, DateTime, String
+from sqlalchemy.dialects.postgresql import UUID
 
 from app.db.models.base import Base
+
 
 class AuditExport(Base):
     """

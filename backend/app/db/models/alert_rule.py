@@ -1,9 +1,10 @@
-from sqlalchemy import Column, String, ForeignKey, Enum, Boolean, UniqueConstraint, Index
+from sqlalchemy import Boolean, Column, Enum, ForeignKey, String, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin
-from app.db.models.enums import RuleStatus, AlertSeverity
+from app.db.models.enums import AlertSeverity, RuleStatus
+from app.db.models.mixins import AuditMixin, TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class AlertRule(Base, UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin):
     __tablename__ = "alert_rules"

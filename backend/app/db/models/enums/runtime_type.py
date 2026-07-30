@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class RuntimeType(str, Enum):
     PYTHON = "PYTHON"
     JAVA = "JAVA"

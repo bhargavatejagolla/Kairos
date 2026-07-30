@@ -1,6 +1,8 @@
-from celery.signals import worker_ready
-from .events import TaskEventMonitor
 import logging
+
+from celery.signals import worker_ready
+
+from .events import TaskEventMonitor
 
 logger = logging.getLogger(__name__)
 

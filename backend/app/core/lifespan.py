@@ -3,11 +3,13 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.events.bus import event_bus
-from app.notifications.events.notification_events import register_notification_events
 from app.audit.events.audit_events import register_audit_events
 from app.core.config import settings
 from app.core.logging import configure_logging, logger
+from app.events.bus import event_bus
+from app.notifications.events.notification_events import register_notification_events
+import redis.asyncio as redis
+from fastapi_limiter import FastAPILimiter
 
 
 @asynccontextmanager
@@ -29,11 +31,16 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         version=settings.app_version,
         environment=settings.app_env,
     )
+    
+    # Initialize Rate Limiter
+    redis_conn = redis.from_url(settings.redis_url, encoding="utf-8", decode_responses=True)
+    await FastAPILimiter.init(redis_conn)
 
     yield
 
-    import app.main as main_app
     import asyncio
+
+    import app.main as main_app
     
     logger.info("Initiating graceful shutdown...")
     # 1. Mark readiness probe as failed so K8s stops sending new traffic

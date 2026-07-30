@@ -1,8 +1,9 @@
-from sqlalchemy import Column, String, ForeignKey, DateTime, Integer
+from sqlalchemy import Column, DateTime, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin
+from app.db.models.mixins import AuditMixin, TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class MaintenanceWindow(Base, UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin):
     __tablename__ = "maintenance_windows"

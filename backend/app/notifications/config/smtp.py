@@ -1,5 +1,6 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 class SMTPConfig(BaseSettings):
     host: str = Field(alias="SMTP_HOST", default="smtp.gmail.com")

@@ -1,12 +1,11 @@
 import logging
-from typing import List, Dict
 from uuid import UUID
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.db.models.signal import Signal
 from app.db.models.alert_rule import AlertRule
-from app.services.rule_engine import RuleEngine
 from app.repositories.signal import SignalRepository
+from app.services.rule_engine import RuleEngine
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +18,7 @@ class AlertReplayEngine:
         self.rule_engine = RuleEngine()
         self.signal_repo = SignalRepository(session)
 
-    async def simulate(self, service_id: UUID, proposed_rule: AlertRule, hours_back: int = 24) -> Dict[str, any]:
+    async def simulate(self, service_id: UUID, proposed_rule: AlertRule, hours_back: int = 24) -> dict[str, any]:
         """
         Replays the last `hours_back` of signals for the service against a hypothetical rule definition.
         Returns statistics on how many alerts WOULD have fired.

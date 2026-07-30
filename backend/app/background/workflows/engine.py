@@ -1,5 +1,6 @@
-from typing import Dict, Any, List, Callable
 import logging
+from collections.abc import Callable
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -12,7 +13,7 @@ class WorkflowStep:
 class WorkflowPipeline:
     def __init__(self, name: str):
         self.name = name
-        self.steps: List[WorkflowStep] = []
+        self.steps: list[WorkflowStep] = []
         
     def add_step(self, name: str, action: Callable, compensation: Callable = None):
         self.steps.append(WorkflowStep(name, action, compensation))
@@ -23,7 +24,7 @@ class WorkflowEngine:
     Executes a multi-step background workflow pipeline.
     Implements the Saga pattern: if a step fails, it runs compensation for previous steps.
     """
-    _workflows: Dict[str, WorkflowPipeline] = {}
+    _workflows: dict[str, WorkflowPipeline] = {}
     
     @classmethod
     def register(cls, pipeline: WorkflowPipeline):
@@ -51,7 +52,7 @@ class WorkflowEngine:
                 break
                 
     @classmethod
-    def _compensate(cls, completed_steps: List[WorkflowStep], payload: Any):
+    def _compensate(cls, completed_steps: list[WorkflowStep], payload: Any):
         # Reverse order compensation
         for step in reversed(completed_steps):
             if step.compensation:

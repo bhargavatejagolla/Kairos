@@ -1,9 +1,9 @@
-import logging
 from app.background.base_task import BaseTask
-from app.background.reliability.distributed_lock import distributed_lock
 from app.background.monitoring.logging import get_job_logger
 from app.background.monitoring.metrics import record_job_metrics
 from app.background.monitoring.tracing import trace_job
+from app.background.reliability.distributed_lock import distributed_lock
+
 
 class BaseJob(BaseTask):
     """

@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 
+from app.api.v1.audit.analytics import router as analytics_router
+from app.api.v1.audit.exports import router as exports_router
+from app.api.v1.audit.investigations import router as investigations_router
 from app.api.v1.audit.search import router as search_router
 from app.api.v1.audit.timeline import router as timeline_router
-from app.api.v1.audit.analytics import router as analytics_router
-from app.api.v1.audit.investigations import router as investigations_router
-from app.api.v1.audit.exports import router as exports_router
 
 router = APIRouter()
 

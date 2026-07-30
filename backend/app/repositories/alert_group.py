@@ -1,17 +1,18 @@
-from typing import Sequence, Optional
+from collections.abc import Sequence
 from uuid import UUID
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
 
 from app.db.models.alert_group import AlertGroup
 from app.repositories.base import BaseRepository
+
 
 class AlertGroupRepository(BaseRepository[AlertGroup]):
     def __init__(self, session: AsyncSession):
         super().__init__(AlertGroup, session)
 
-    async def get_by_correlation_key(self, organization_id: UUID, correlation_key: str, status: str = "OPEN") -> Optional[AlertGroup]:
+    async def get_by_correlation_key(self, organization_id: UUID, correlation_key: str, status: str = "OPEN") -> AlertGroup | None:
         stmt = select(AlertGroup).where(
             AlertGroup.organization_id == organization_id,
             AlertGroup.correlation_key == correlation_key,

@@ -1,9 +1,11 @@
-from app.background.celery_app import celery_app
+import asyncio
+
+import structlog
 from app.background.jobs.base import BaseJob
+
+from app.background.celery_app import celery_app
 from app.db.session import SessionLocal
 from app.events.outbox_service import OutboxService
-import structlog
-import asyncio
 
 logger = structlog.get_logger(__name__)
 

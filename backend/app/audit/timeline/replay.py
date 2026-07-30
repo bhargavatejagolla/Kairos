@@ -1,7 +1,8 @@
-from typing import Dict, Any, List
+from typing import Any
 from uuid import UUID
 
 from app.audit.models.audit_log import AuditLog
+
 
 class AuditReplayService:
     """
@@ -9,14 +10,14 @@ class AuditReplayService:
     Reconstructs the state of a resource at a specific point in time by replaying its AuditChange records.
     """
     
-    def reconstruct_state(self, timeline: List[AuditLog], target_resource_id: str, until_log_id: UUID = None) -> Dict[str, Any]:
+    def reconstruct_state(self, timeline: list[AuditLog], target_resource_id: str, until_log_id: UUID = None) -> dict[str, Any]:
         """
         Given a chronological list of AuditLogs for a resource, this replays the changes
         to build a JSON representation of the resource's state.
         
         If until_log_id is provided, it stops replaying once it processes that log.
         """
-        state: Dict[str, Any] = {}
+        state: dict[str, Any] = {}
         
         for log in timeline:
             # Look for changes pertaining to the target_resource_id

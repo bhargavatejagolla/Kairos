@@ -1,5 +1,6 @@
 import jinja2
 
+
 class TemplateEngine:
     def __init__(self):
         # Allow loading templates directly from strings (from DB)

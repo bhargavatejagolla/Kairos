@@ -1,8 +1,10 @@
-from sqlalchemy import Column, Boolean, Integer
-from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
+from sqlalchemy import Boolean, Column, Integer
+from sqlalchemy.dialects.postgresql import UUID
+
 from app.db.models.base import Base
+
 
 class AuditRetentionPolicy(Base):
     """

@@ -1,8 +1,9 @@
 import logging
-from typing import List
-from uuid import UUID
 from datetime import datetime, timezone
+from uuid import UUID
+
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.db.models.alert import Alert
 from app.repositories.silence import SilenceRepository
 

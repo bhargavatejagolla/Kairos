@@ -1,8 +1,10 @@
 import uuid
-from sqlalchemy import String, ForeignKey, Integer, Float, Text
+
+from sqlalchemy import Float, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.models.base import BaseModel
+
 
 class AIResponse(BaseModel):
     __tablename__ = "ai_responses"

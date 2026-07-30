@@ -1,7 +1,8 @@
+from typing import Any
+from uuid import UUID
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
-from typing import List, Any
-from uuid import UUID
 
 from app.api.deps.database import get_db
 from app.background.schemas.task import BackgroundTaskCreate, BackgroundTaskResponse
@@ -18,7 +19,7 @@ async def create_task(
     service = TaskService(db)
     return await service.create_task(task_in)
 
-@router.get("", response_model=List[BackgroundTaskResponse])
+@router.get("", response_model=list[BackgroundTaskResponse])
 async def list_tasks(
     skip: int = 0,
     limit: int = 100,

@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+
 from app.ai.workflows.chat_workflow import ChatWorkflow
 from app.schemas.ai.responses import ChatRequest, ChatResponse
 

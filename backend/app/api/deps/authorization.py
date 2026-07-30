@@ -1,14 +1,15 @@
-from typing import Callable, Coroutine, Any
-from fastapi import Depends, HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncSession
+from collections.abc import Callable
 
+from fastapi import Depends, HTTPException, status
+
+from app.api.deps.project import get_project_context
+from app.api.deps.service import get_service_context
 from app.api.deps.services import get_authorization_service
 from app.core.permissions import Permission
-from app.core.service_context import ServiceContext
 from app.core.project_context import ProjectContext
+from app.core.service_context import ServiceContext
 from app.services.authorization import AuthorizationService
-from app.api.deps.service import get_service_context
-from app.api.deps.project import get_project_context
+
 
 def require_incident_permission(permission: Permission) -> Callable:
     """

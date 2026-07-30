@@ -1,11 +1,11 @@
 import logging
-from typing import Optional
 from uuid import UUID
-from datetime import datetime, timedelta
+
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.db.models.alert import Alert
-from app.db.models.alert_group import AlertGroup
 from app.db.models.alert_correlation import AlertCorrelation
+from app.db.models.alert_group import AlertGroup
 from app.repositories.alert_group import AlertGroupRepository
 
 logger = logging.getLogger(__name__)

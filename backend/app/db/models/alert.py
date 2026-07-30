@@ -1,9 +1,10 @@
-from sqlalchemy import Column, String, ForeignKey, Enum, DateTime, Index
+from sqlalchemy import Column, DateTime, Enum, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin
-from app.db.models.enums import AlertStatus, AlertSeverity
+from app.db.models.enums import AlertSeverity, AlertStatus
+from app.db.models.mixins import TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class Alert(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     __tablename__ = "alerts"

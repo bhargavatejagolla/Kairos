@@ -1,5 +1,6 @@
-from typing import Callable, Dict, List, Any
 import logging
+from collections.abc import Callable
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -8,7 +9,7 @@ class EventBus:
     In-memory pub-sub event bus.
     For cross-process, this should bridge to Redis Pub/Sub.
     """
-    _subscribers: Dict[str, List[Callable]] = {}
+    _subscribers: dict[str, list[Callable]] = {}
 
     @classmethod
     def subscribe(cls, event_name: str, handler: Callable):

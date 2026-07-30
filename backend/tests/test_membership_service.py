@@ -3,7 +3,7 @@ from uuid import uuid4
 
 import pytest
 
-from app.core.exceptions import CannotRemoveLastOwnerError, MembershipNotFoundError
+from app.core.exceptions import CannotRemoveLastOwnerError
 from app.db.models.organization_member import OrganizationMember
 from app.db.models.role import Role
 from app.services.membership_service import MembershipService

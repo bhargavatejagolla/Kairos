@@ -3,12 +3,19 @@ from uuid import UUID
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.events import event_bus
-from app.core.exceptions import EnvironmentNotFoundError, InvalidProjectStateError, ProjectAlreadyExistsError, ProjectArchivedError, ProjectNotFoundError
+from app.core.exceptions import (
+    EnvironmentNotFoundError,
+    InvalidProjectStateError,
+    ProjectAlreadyExistsError,
+    ProjectArchivedError,
+    ProjectNotFoundError,
+)
 from app.core.project import ProjectStatus
-from app.db.models.project_settings import ProjectSettings
 from app.repositories.environment import EnvironmentRepository
 from app.repositories.project import ProjectRepository
 from app.schemas.project import ProjectCreate, ProjectUpdate
+
+
 class ProjectService:
     def __init__(
         self,

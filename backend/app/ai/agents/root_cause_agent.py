@@ -1,12 +1,14 @@
-from typing import Any, Dict
+from typing import Any
+
 from app.ai.agents.base_agent import BaseAgent
+
 
 class RootCauseAgent(BaseAgent):
     @property
     def role(self) -> str:
         return "root_cause_analyst"
         
-    async def run(self, context: Dict[str, Any]) -> Dict[str, Any]:
+    async def run(self, context: dict[str, Any]) -> dict[str, Any]:
         incident_id = context.get("incident_id")
         
         # 1. Use tools to gather data

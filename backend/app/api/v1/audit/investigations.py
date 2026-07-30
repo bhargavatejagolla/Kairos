@@ -1,14 +1,13 @@
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from typing import Dict, Any, List
 
 from app.api.deps.auth import get_current_user
 from app.api.deps.database import get_db
-from app.db.models.user import User
-
-from app.audit.search.search_engine import AuditSearchEngine
 from app.audit.investigations.profiles import SavedInvestigationProfiles
 from app.audit.schemas.audit import AuditLogResponse
+from app.audit.search.search_engine import AuditSearchEngine
+from app.db.models.user import User
 
 router = APIRouter()
 
@@ -19,7 +18,7 @@ async def get_profiles(current_user: User = Depends(get_current_user)):
     """
     return SavedInvestigationProfiles.list_profiles()
 
-@router.post("/profiles/{profile_id}/execute", response_model=List[AuditLogResponse])
+@router.post("/profiles/{profile_id}/execute", response_model=list[AuditLogResponse])
 async def execute_profile(
     profile_id: str,
     db: AsyncSession = Depends(get_db),

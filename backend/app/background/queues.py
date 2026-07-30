@@ -1,8 +1,13 @@
-from kombu import Queue, Exchange
+from kombu import Exchange, Queue
+
 from .constants import (
-    QUEUE_DEFAULT, QUEUE_AI, QUEUE_NOTIFICATIONS, 
-    QUEUE_KNOWLEDGE, QUEUE_REPORTS, QUEUE_DEPLOYMENTS, 
-    QUEUE_MAINTENANCE
+    QUEUE_AI,
+    QUEUE_DEFAULT,
+    QUEUE_DEPLOYMENTS,
+    QUEUE_KNOWLEDGE,
+    QUEUE_MAINTENANCE,
+    QUEUE_NOTIFICATIONS,
+    QUEUE_REPORTS,
 )
 
 task_exchange = Exchange('kairos_tasks', type='direct')

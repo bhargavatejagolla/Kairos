@@ -1,14 +1,14 @@
-from app.background.celery_app import celery_app
-from app.background.jobs.base import BaseJob
-from app.db.session import SessionLocal
-import structlog
 import asyncio
-from datetime import datetime, timedelta, UTC
-from sqlalchemy import select, delete
-from uuid import UUID
+from datetime import UTC, datetime, timedelta
+
+import structlog
+from app.background.jobs.base import BaseJob
+from sqlalchemy import delete, select
 
 from app.audit.models.audit_log import AuditLog
 from app.audit.models.retention import AuditRetentionPolicy
+from app.background.celery_app import celery_app
+from app.db.session import SessionLocal
 
 logger = structlog.get_logger(__name__)
 

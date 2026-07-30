@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class NotificationStatus(str, Enum):
     PENDING = "PENDING"
     QUEUED = "QUEUED"

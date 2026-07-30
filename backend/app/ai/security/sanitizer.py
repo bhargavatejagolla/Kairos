@@ -1,5 +1,6 @@
 import re
 
+
 class Sanitizer:
     def sanitize(self, text: str) -> str:
         # Stub for masking passwords, secrets, API keys, JWTs

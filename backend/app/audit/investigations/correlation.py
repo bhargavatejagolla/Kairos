@@ -1,8 +1,9 @@
+from typing import Any
+
 from sqlalchemy.ext.asyncio import AsyncSession
-from typing import Dict, Any, List
 
 from app.audit.timeline.builder import TimelineBuilder
-from app.audit.models.audit_log import AuditLog
+
 
 class CorrelationWorkspace:
     """
@@ -14,7 +15,7 @@ class CorrelationWorkspace:
         self.session = session
         self.timeline_builder = TimelineBuilder(session)
 
-    async def build_investigation_trace(self, correlation_id: str) -> Dict[str, Any]:
+    async def build_investigation_trace(self, correlation_id: str) -> dict[str, Any]:
         """
         Returns a structured trace of all activities sharing the same correlation_id.
         """

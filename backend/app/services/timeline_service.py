@@ -1,11 +1,10 @@
+from datetime import UTC, datetime
 from uuid import UUID
-from datetime import datetime, UTC
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.db.models.incident_timeline import IncidentTimeline
 from app.db.models.enums import TimelineEvent
+from app.db.models.incident_timeline import IncidentTimeline
 from app.repositories.timeline import TimelineRepository
-from app.schemas.timeline import TimelineEntryCreate
+
 
 class TimelineService:
     def __init__(self, repository: TimelineRepository):

@@ -1,7 +1,9 @@
-from typing import Any, Dict
+from typing import Any
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.events import event_bus
+
 
 class WorkflowEngine:
     """
@@ -16,7 +18,7 @@ class WorkflowEngine:
         current_state: Any,
         target_state: Any,
         session: AsyncSession,
-        metadata: Dict[str, Any] = None
+        metadata: dict[str, Any] = None
     ):
         """
         Orchestrate the side-effects of a successful state transition.

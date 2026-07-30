@@ -1,4 +1,5 @@
-from typing import Dict, Any
+from typing import Any
+
 
 class SavedInvestigationProfiles:
     """
@@ -40,9 +41,9 @@ class SavedInvestigationProfiles:
     }
 
     @classmethod
-    def get_profile(cls, profile_id: str) -> Dict[str, Any]:
+    def get_profile(cls, profile_id: str) -> dict[str, Any]:
         return cls.PROFILES.get(profile_id)
         
     @classmethod
-    def list_profiles(cls) -> Dict[str, Any]:
+    def list_profiles(cls) -> dict[str, Any]:
         return cls.PROFILES

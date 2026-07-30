@@ -1,11 +1,13 @@
-from typing import Sequence
-from uuid import UUID
+from collections.abc import Sequence
 from datetime import datetime
-from sqlalchemy import select, or_, and_
+from uuid import UUID
+
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.silence import Silence
 from app.repositories.base import BaseRepository
+
 
 class SilenceRepository(BaseRepository[Silence]):
     def __init__(self, session: AsyncSession):

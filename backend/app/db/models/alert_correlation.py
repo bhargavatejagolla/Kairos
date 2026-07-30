@@ -1,8 +1,9 @@
-from sqlalchemy import Column, String, ForeignKey, Float
+from sqlalchemy import Column, Float, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin
+from app.db.models.mixins import TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class AlertCorrelation(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     __tablename__ = "alert_correlations"

@@ -1,20 +1,20 @@
+from typing import Any
+
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel
-from typing import Dict, Any
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps.auth import get_current_user
 from app.api.deps.database import get_db
-from app.db.models.user import User
-
 from app.audit.models.export import AuditExport
 from app.background.celery_app import celery_app
+from app.db.models.user import User
 
 router = APIRouter()
 
 class ExportRequest(BaseModel):
     format: str = "CSV" # CSV or JSON
-    filters: Dict[str, Any] = {}
+    filters: dict[str, Any] = {}
 
 @router.post("")
 async def create_export(

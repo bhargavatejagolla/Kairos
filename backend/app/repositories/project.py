@@ -1,4 +1,4 @@
-from typing import Sequence
+from collections.abc import Sequence
 from uuid import UUID
 
 from sqlalchemy import func, select
@@ -8,7 +8,6 @@ from sqlalchemy.orm import selectinload
 from app.core.project import ProjectStatus
 from app.db.models.project import Project
 from app.repositories.base import BaseRepository
-from app.schemas.project import ProjectCreate, ProjectUpdate
 
 
 class ProjectRepository(BaseRepository[Project]):

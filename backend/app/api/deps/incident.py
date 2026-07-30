@@ -1,13 +1,13 @@
 from typing import Annotated
 
 from fastapi import Depends, HTTPException, Path, status
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps.organization import get_organization_context
 from app.api.deps.services import get_incident_service
 from app.core.organization_context import OrganizationContext
 from app.db.models.incident import Incident
 from app.services.incident_service import IncidentService
+
 
 async def get_incident(
     incident_number: str = Path(..., description="The readable number of the incident (e.g., INC-0001)"),

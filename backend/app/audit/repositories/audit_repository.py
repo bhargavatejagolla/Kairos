@@ -1,13 +1,10 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
 from uuid import UUID
-from typing import List, Optional
+
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.audit.models.audit_log import AuditLog
-from app.audit.models.actor import AuditActor
-from app.audit.models.target import AuditTarget
-from app.audit.models.change import AuditChange
-from app.audit.models.metadata import AuditMetadata
+
 
 class AuditRepository:
     """
@@ -22,12 +19,12 @@ class AuditRepository:
         await self.session.flush()
         return audit_log
 
-    async def get_by_id(self, log_id: UUID) -> Optional[AuditLog]:
+    async def get_by_id(self, log_id: UUID) -> AuditLog | None:
         stmt = select(AuditLog).where(AuditLog.id == log_id)
         result = await self.session.execute(stmt)
         return result.scalars().first()
 
-    async def get_by_correlation_id(self, correlation_id: str) -> List[AuditLog]:
+    async def get_by_correlation_id(self, correlation_id: str) -> list[AuditLog]:
         stmt = select(AuditLog).where(AuditLog.correlation_id == correlation_id).order_by(AuditLog.created_at)
         result = await self.session.execute(stmt)
         return list(result.scalars().all())

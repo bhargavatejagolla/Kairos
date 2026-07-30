@@ -1,9 +1,11 @@
+from collections.abc import Sequence
 from uuid import UUID
-from typing import Sequence
+
 from sqlalchemy import select
 
-from app.repositories.base import BaseRepository
 from app.db.models.incident_timeline import IncidentTimeline
+from app.repositories.base import BaseRepository
+
 
 class TimelineRepository(BaseRepository[IncidentTimeline]):
     def __init__(self, session):

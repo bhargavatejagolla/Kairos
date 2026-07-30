@@ -1,5 +1,6 @@
 from app.core.config import settings
 
+
 class BackgroundConfig:
     CELERY_BROKER_URL = settings.celery_broker_url
     CELERY_RESULT_BACKEND = settings.celery_result_backend

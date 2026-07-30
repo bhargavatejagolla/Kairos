@@ -1,5 +1,7 @@
-import celery
 import logging
+
+import celery
+
 from .config import background_config
 
 logger = logging.getLogger(__name__)

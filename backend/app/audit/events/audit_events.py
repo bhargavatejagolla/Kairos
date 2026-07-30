@@ -1,8 +1,9 @@
 import structlog
-from app.events.bus import EventBus
-from app.db.session import SessionLocal
-from app.audit.services.audit_service import AuditService
+
 from app.audit.schemas.audit import AuditEventCreate
+from app.audit.services.audit_service import AuditService
+from app.db.session import SessionLocal
+from app.events.bus import EventBus
 
 logger = structlog.get_logger(__name__)
 

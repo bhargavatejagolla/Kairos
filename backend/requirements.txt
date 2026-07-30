@@ -84,3 +84,4 @@ opentelemetry-instrumentation-celery
 opentelemetry-exporter-otlp
 pytest-asyncio
 setuptools<70.0.0
+fastapi-limiter==0.1.6

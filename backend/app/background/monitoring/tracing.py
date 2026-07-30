@@ -1,5 +1,6 @@
-from opentelemetry import trace
 from functools import wraps
+
+from opentelemetry import trace
 
 tracer = trace.get_tracer("kairos.background")
 

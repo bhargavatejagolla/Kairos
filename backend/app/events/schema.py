@@ -1,7 +1,9 @@
-from pydantic import BaseModel, Field
-from typing import Any, Dict, Optional
-from datetime import datetime, UTC
 import uuid
+from datetime import UTC, datetime
+from typing import Any
+
+from pydantic import BaseModel, Field
+
 
 class DomainEvent(BaseModel):
     """
@@ -12,15 +14,15 @@ class DomainEvent(BaseModel):
     event_type: str
     occurred_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
     
-    organization_id: Optional[str] = None
-    project_id: Optional[str] = None
+    organization_id: str | None = None
+    project_id: str | None = None
     
     resource_type: str
     resource_id: str
     
-    actor_id: Optional[str] = None
-    correlation_id: Optional[str] = None
-    request_id: Optional[str] = None
+    actor_id: str | None = None
+    correlation_id: str | None = None
+    request_id: str | None = None
     
-    payload: Dict[str, Any] = Field(default_factory=dict)
-    metadata: Dict[str, Any] = Field(default_factory=dict)
+    payload: dict[str, Any] = Field(default_factory=dict)
+    metadata: dict[str, Any] = Field(default_factory=dict)

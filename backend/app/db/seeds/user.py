@@ -1,7 +1,8 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.db.models.user import User
+
 from app.core.security import get_password_hash
+from app.db.models.user import User
 
 
 async def seed_default_user(db: AsyncSession) -> User:

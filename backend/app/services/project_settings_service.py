@@ -4,6 +4,7 @@ from app.core.exceptions import ProjectNotFoundError
 from app.repositories.project_settings import ProjectSettingsRepository
 from app.schemas.project_settings import ProjectSettingsUpdate
 
+
 class ProjectSettingsService:
     def __init__(self, settings_repo: ProjectSettingsRepository):
         self.settings_repo = settings_repo

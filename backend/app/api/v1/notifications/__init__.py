@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 
-from .notifications import router as notifications_router
-from .templates import router as templates_router
-from .preferences import router as preferences_router
 from .health import router as health_router
+from .notifications import router as notifications_router
+from .preferences import router as preferences_router
+from .templates import router as templates_router
 
 router = APIRouter()
 

@@ -1,10 +1,10 @@
-from uuid import UUID
-from sqlalchemy import Column, String, ForeignKey, UniqueConstraint, Enum, Index
+from sqlalchemy import Column, Enum, ForeignKey, String, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin
-from app.db.models.enums import ServiceType, ServiceStatus, ServiceTier, RuntimeType
+from app.db.models.enums import RuntimeType, ServiceStatus, ServiceTier, ServiceType
+from app.db.models.mixins import AuditMixin, TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class Service(Base, UUIDPrimaryKeyMixin, TimestampMixin, AuditMixin):
     __tablename__ = "services"

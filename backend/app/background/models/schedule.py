@@ -1,5 +1,7 @@
-from sqlalchemy import Column, String, Boolean, DateTime
+from sqlalchemy import Boolean, Column, DateTime, String
+
 from app.db.models.base import BaseModel
+
 
 class TaskSchedule(BaseModel):
     __tablename__ = "task_schedules"

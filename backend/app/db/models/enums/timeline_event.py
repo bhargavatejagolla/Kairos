@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TimelineEvent(str, Enum):
     CREATED = "CREATED"
     ACKNOWLEDGED = "ACKNOWLEDGED"

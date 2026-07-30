@@ -1,12 +1,13 @@
-from fastapi import APIRouter, Depends, status
 from typing import Annotated
 
+from fastapi import APIRouter, Depends, status
+
+from app.api.deps.authorization import require_service_permission
 from app.api.deps.project import ProjectContextDep
 from app.api.deps.services import get_service_service
-from app.api.deps.authorization import require_service_permission
 from app.core.permissions import Permission
-from app.schemas.service import ServiceCreate, ServiceResponse, ServiceUpdate
 from app.schemas.pagination import PaginatedResponse
+from app.schemas.service import ServiceCreate, ServiceResponse
 from app.services.service_service import ServiceService
 
 router = APIRouter(tags=["Services"])

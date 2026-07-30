@@ -1,9 +1,10 @@
-from typing import TypeVar, Type, Dict, Any, Generic, Protocol
+from typing import Any, Generic, Protocol, TypeVar
+
 from pydantic import BaseModel
+
 
 class Command(BaseModel):
     """Base class for all commands."""
-    pass
 
 C = TypeVar('C', bound=Command)
 R = TypeVar('R')
@@ -14,9 +15,9 @@ class CommandHandler(Protocol, Generic[C, R]):
 
 class CommandBus:
     def __init__(self):
-        self._handlers: Dict[Type[Command], Any] = {}
+        self._handlers: dict[type[Command], Any] = {}
 
-    def register(self, command_type: Type[Command], handler: Any) -> None:
+    def register(self, command_type: type[Command], handler: Any) -> None:
         if command_type in self._handlers:
             raise ValueError(f"Handler already registered for command {command_type.__name__}")
         self._handlers[command_type] = handler

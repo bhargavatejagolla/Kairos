@@ -1,9 +1,11 @@
+from collections.abc import Sequence
 from uuid import UUID
-from typing import Sequence
+
 from sqlalchemy import select
 
-from app.repositories.base import BaseRepository
 from app.db.models.incident_attachment import IncidentAttachment
+from app.repositories.base import BaseRepository
+
 
 class AttachmentRepository(BaseRepository[IncidentAttachment]):
     def __init__(self, session):

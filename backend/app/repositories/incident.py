@@ -1,10 +1,12 @@
+from collections.abc import Sequence
 from uuid import UUID
-from typing import Sequence
-from sqlalchemy import select, func
+
+from sqlalchemy import func, select
 from sqlalchemy.orm import selectinload
 
-from app.repositories.base import BaseRepository
 from app.db.models.incident import Incident
+from app.repositories.base import BaseRepository
+
 
 class IncidentRepository(BaseRepository[Incident]):
     def __init__(self, session):

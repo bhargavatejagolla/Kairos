@@ -1,7 +1,8 @@
-from app.events.bus import EventBus
-from app.db.session import SessionLocal
-from app.notifications.routing.notification_router import NotificationRouter
 import structlog
+
+from app.db.session import SessionLocal
+from app.events.bus import EventBus
+from app.notifications.routing.notification_router import NotificationRouter
 
 logger = structlog.get_logger(__name__)
 

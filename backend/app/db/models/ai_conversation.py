@@ -1,7 +1,8 @@
 import uuid
-from sqlalchemy import String, ForeignKey
+from typing import TYPE_CHECKING
+
+from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from typing import List, TYPE_CHECKING
 
 from app.db.models.base import BaseModel
 
@@ -17,4 +18,4 @@ class AIConversation(BaseModel):
     title: Mapped[str] = mapped_column(String(255))
     
     # Relationships
-    messages: Mapped[List["AIMessage"]] = relationship("AIMessage", back_populates="conversation", cascade="all, delete-orphan")
+    messages: Mapped[list["AIMessage"]] = relationship("AIMessage", back_populates="conversation", cascade="all, delete-orphan")

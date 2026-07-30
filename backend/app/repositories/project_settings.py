@@ -5,7 +5,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.project_settings import ProjectSettings
 from app.repositories.base import BaseRepository
-from app.schemas.project_settings import ProjectSettingsUpdate
 
 
 class ProjectSettingsRepository(BaseRepository[ProjectSettings]):

@@ -1,8 +1,9 @@
-from sqlalchemy import Column, String, ForeignKey, Integer
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin
+from app.db.models.mixins import TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class IncidentAttachment(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     __tablename__ = "incident_attachments"

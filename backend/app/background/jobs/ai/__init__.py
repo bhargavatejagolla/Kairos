@@ -1,6 +1,7 @@
 from app.background.celery_app import celery_app
 from app.background.jobs.base_job import BaseJob
 
+
 @celery_app.task(bind=True, base=BaseJob)
 def analyze_incident(self, incident_id: str, idempotency_key: str = None):
     if idempotency_key and not self.validate_idempotency(idempotency_key):

@@ -1,15 +1,17 @@
-from sqlalchemy import Column, String, Text, DateTime, ForeignKey, Enum as SQLEnum, text, Index
+import uuid
+from datetime import UTC, datetime
+
+from sqlalchemy import Column, DateTime, Index, String, Text
+from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
-import uuid
-from datetime import datetime, UTC
 
-from app.db.models.base import Base
 from app.audit.enums.action import AuditAction
 from app.audit.enums.severity import AuditSeverity
 from app.audit.enums.source import AuditSource
 from app.audit.enums.status import AuditStatus
-from app.audit.enums.resource_type import ResourceType
+from app.db.models.base import Base
+
 
 class AuditLog(Base):
     __tablename__ = "audit_logs"

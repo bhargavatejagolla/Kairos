@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class DependencyType(str, Enum):
     SYNCHRONOUS = "SYNCHRONOUS"
     ASYNCHRONOUS = "ASYNCHRONOUS"

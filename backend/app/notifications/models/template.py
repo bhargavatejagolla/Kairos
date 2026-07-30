@@ -1,9 +1,11 @@
 from uuid import UUID
+
+from sqlalchemy import Boolean, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String, ForeignKey, Boolean, Text
 
 from app.db.models.base import BaseModel
 from app.notifications.enums.category import NotificationCategory
+
 
 class EmailTemplate(BaseModel):
     __tablename__ = "email_templates"

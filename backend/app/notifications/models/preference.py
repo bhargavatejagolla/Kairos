@@ -1,8 +1,10 @@
 from uuid import UUID
+
+from sqlalchemy import Boolean, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, Boolean
 
 from app.db.models.base import BaseModel
+
 
 class NotificationPreference(BaseModel):
     __tablename__ = "notification_preferences"

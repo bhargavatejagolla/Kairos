@@ -1,10 +1,13 @@
 from datetime import datetime
 from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict
-from app.notifications.enums.status import NotificationStatus
-from app.notifications.enums.priority import NotificationPriority
-from app.notifications.enums.channel import NotificationChannel
+
 from app.notifications.enums.category import NotificationCategory
+from app.notifications.enums.channel import NotificationChannel
+from app.notifications.enums.priority import NotificationPriority
+from app.notifications.enums.status import NotificationStatus
+
 
 class NotificationBase(BaseModel):
     recipient_user_id: UUID | None = None

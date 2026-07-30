@@ -1,10 +1,13 @@
-from sqlalchemy import Column, String, ForeignKey, Enum as SQLEnum
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import relationship
 import uuid
 
-from app.db.models.base import Base
+from sqlalchemy import Column, ForeignKey, String
+from sqlalchemy import Enum as SQLEnum
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
+
 from app.audit.enums.resource_type import ResourceType
+from app.db.models.base import Base
+
 
 class AuditTarget(Base):
     """

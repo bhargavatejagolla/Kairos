@@ -1,13 +1,13 @@
 from typing import Annotated
 
 from fastapi import Depends, HTTPException, Path, status
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps.project import get_project_context
 from app.api.deps.services import get_service_service
 from app.core.project_context import ProjectContext
 from app.core.service_context import ServiceContext
 from app.services.service_service import ServiceService
+
 
 async def get_service_context(
     service_slug: str = Path(..., description="The slug of the service"),

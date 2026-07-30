@@ -1,4 +1,5 @@
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
+
 
 class StreamManager:
     async def stream_response(self, response_generator: AsyncGenerator[str, None]) -> AsyncGenerator[str, None]:

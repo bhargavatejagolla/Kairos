@@ -1,6 +1,10 @@
 from uuid import UUID
 
-from app.core.exceptions import OrganizationAlreadyExistsError, OrganizationNotFoundError, ReservedSlugError
+from app.core.exceptions import (
+    OrganizationAlreadyExistsError,
+    OrganizationNotFoundError,
+    ReservedSlugError,
+)
 from app.db.models.organization import Organization
 from app.repositories.organization import OrganizationRepository
 from app.schemas.organization import OrganizationCreate, OrganizationUpdate

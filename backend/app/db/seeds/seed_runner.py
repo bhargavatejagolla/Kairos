@@ -107,8 +107,8 @@ async def main() -> None:
         await seed_development_organization(session, user, org_service)
         
         # Seed Projects and Incident Domain
-        from app.db.seeds.project import seed_projects
         from app.db.seeds.incident import seed_incident_domain
+        from app.db.seeds.project import seed_projects
         await seed_projects(session)
         await seed_incident_domain(session)
         

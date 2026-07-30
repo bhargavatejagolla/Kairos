@@ -1,12 +1,13 @@
-import pytest
-from uuid import uuid4
 from datetime import datetime, timezone
-from app.db.models.signal import Signal
-from app.db.models.alert_rule import AlertRule
-from app.db.models.rule_definition import RuleDefinition
+from uuid import uuid4
+
 from app.db.models.alert_condition import AlertCondition
+from app.db.models.alert_rule import AlertRule
 from app.db.models.enums import AlertOperator, SignalType
+from app.db.models.rule_definition import RuleDefinition
+from app.db.models.signal import Signal
 from app.services.rule_engine import RuleEngine
+
 
 def test_rule_engine_evaluation():
     engine = RuleEngine()

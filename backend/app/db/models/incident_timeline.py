@@ -1,9 +1,10 @@
-from sqlalchemy import Column, String, ForeignKey, Enum, DateTime, Index, JSON
+from sqlalchemy import JSON, Column, DateTime, Enum, ForeignKey, Index, String
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin
 from app.db.models.enums import TimelineEvent
+from app.db.models.mixins import UUIDPrimaryKeyMixin
+
 
 class IncidentTimeline(Base, UUIDPrimaryKeyMixin):
     __tablename__ = "incident_timeline"

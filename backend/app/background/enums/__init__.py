@@ -1,5 +1,5 @@
-from .task_state import TaskState
-from .task_priority import TaskPriority
 from .task_category import TaskCategory
+from .task_priority import TaskPriority
+from .task_state import TaskState
 
-__all__ = ["TaskState", "TaskPriority", "TaskCategory"]
+__all__ = ["TaskCategory", "TaskPriority", "TaskState"]

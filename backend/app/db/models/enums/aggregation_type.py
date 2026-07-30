@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class AggregationType(str, Enum):
     AVG = "AVG"
     MAX = "MAX"

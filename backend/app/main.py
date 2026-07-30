@@ -1,16 +1,19 @@
-from fastapi import FastAPI, Request
-from prometheus_client import make_asgi_app
-from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 import time
+
+from fastapi import FastAPI, Request
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+from prometheus_client import make_asgi_app
 
 from app.api.exception_handlers import register_exception_handlers
 from app.api.v1 import auth, organizations, permissions, ping, projects, roles, users
 from app.container.application import container
 from app.core.lifespan import lifespan
-from app.middleware.request_id import RequestIDMiddleware
-from app.middleware.correlation import CorrelationIdMiddleware
-from app.core.metrics import http_requests_total, http_request_duration_seconds
+from app.core.metrics import http_request_duration_seconds, http_requests_total
 from app.core.tracing import configure_tracing
+from app.middleware.correlation import CorrelationIdMiddleware
+from app.middleware.request_id import RequestIDMiddleware
+from app.middleware.security import SecurityHeadersMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 # Configure tracing for the application
 configure_tracing()
@@ -52,6 +55,19 @@ app.mount("/metrics", metrics_app)
 
 app.add_middleware(RequestIDMiddleware)
 app.add_middleware(CorrelationIdMiddleware)
+app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost",
+        "http://localhost:5173",
+        "http://app.kairos.local",
+        "https://app.kairos.local"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 register_exception_handlers(app)
 
 
@@ -61,7 +77,6 @@ async def root() -> dict[str, str]:
 
 
 # Kubernetes Probes
-import asyncio
 
 # A simple flag to determine if the app is shutting down
 is_shutting_down = False
@@ -102,16 +117,17 @@ app.include_router(
 
 # Phase 14: Enterprise Audit Platform
 from app.api.v1.audit import router as audit_router
+
 app.include_router(audit_router, prefix="/api/v1/audit")
 
 # AI Routes
 from app.api.ai import (
-    chat_router,
-    incident_router,
     alert_router,
+    chat_router,
+    conversation_router,
+    incident_router,
     knowledge_router,
     prompt_router,
-    conversation_router,
 )
 
 app.include_router(chat_router, prefix="/api/v1/ai/chat", tags=["AI Chat"])

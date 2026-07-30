@@ -84,9 +84,10 @@ async def test_organization_api_flow() -> None:
         # 7. User A (Owner) adds User B as Admin
         # Get Admin role ID first
         async with TestingSessionLocal() as session:
+            from sqlalchemy import select
+
             from app.db.models.role import Role
             from app.db.models.user import User
-            from sqlalchemy import select
             admin_role = (await session.execute(select(Role).where(Role.name == "admin"))).scalar_one()
             admin_role_id = str(admin_role.id)
             user_b = (await session.execute(select(User).where(User.email == "b@example.com"))).scalar_one()

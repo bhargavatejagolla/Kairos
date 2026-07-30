@@ -1,10 +1,11 @@
 import logging
 from uuid import UUID
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.alert import Alert
-from app.repositories.notification_channel import NotificationChannelRepository
 from app.db.models.enums import NotificationChannelType
+from app.repositories.notification_channel import NotificationChannelRepository
 
 logger = logging.getLogger(__name__)
 

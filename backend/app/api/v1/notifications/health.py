@@ -1,6 +1,8 @@
-from fastapi import APIRouter
-from app.notifications.config.smtp import smtp_config
 import socket
+
+from fastapi import APIRouter
+
+from app.notifications.config.smtp import smtp_config
 
 router = APIRouter(prefix="/health", tags=["Notification Health"])
 

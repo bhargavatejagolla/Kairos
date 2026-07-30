@@ -1,4 +1,6 @@
-from typing import Any, Callable, Dict, List, TypeVar, Generic
+from collections.abc import Callable
+from typing import Any, Generic, TypeVar
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 StateT = TypeVar("StateT")
@@ -13,10 +15,10 @@ class StateTransitionError(Exception):
 class StateMachine(Generic[StateT, ContextT]):
     """Generic State Machine to govern entity lifecycle transitions."""
     
-    def __init__(self, allowed_transitions: Dict[StateT, List[StateT]]):
+    def __init__(self, allowed_transitions: dict[StateT, list[StateT]]):
         self.allowed_transitions = allowed_transitions
-        self.before_hooks: Dict[tuple[StateT, StateT], List[Callable]] = {}
-        self.after_hooks: Dict[tuple[StateT, StateT], List[Callable]] = {}
+        self.before_hooks: dict[tuple[StateT, StateT], list[Callable]] = {}
+        self.after_hooks: dict[tuple[StateT, StateT], list[Callable]] = {}
 
     def add_hook(self, current: StateT, target: StateT, hook: Callable, phase: str = "after"):
         key = (current, target)

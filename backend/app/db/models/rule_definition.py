@@ -1,8 +1,9 @@
-from sqlalchemy import Column, Integer, ForeignKey, JSON
+from sqlalchemy import JSON, Column, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin
+from app.db.models.mixins import TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class RuleDefinition(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     __tablename__ = "rule_definitions"

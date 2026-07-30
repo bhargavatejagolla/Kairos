@@ -9,8 +9,8 @@ from app.db.models.base import BaseModel
 from app.db.models.role_permission import role_permissions
 
 if TYPE_CHECKING:
-    from app.db.models.permission import Permission
     from app.db.models.organization_member import OrganizationMember
+    from app.db.models.permission import Permission
 
 
 class Role(BaseModel):
@@ -33,7 +33,7 @@ class Role(BaseModel):
         lazy="selectin",
     )
     
-    members: Mapped[list["OrganizationMember"]] = relationship(
+    members: Mapped[list[OrganizationMember]] = relationship(
         "OrganizationMember",
         back_populates="role",
     )

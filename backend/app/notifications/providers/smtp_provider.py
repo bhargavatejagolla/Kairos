@@ -1,8 +1,10 @@
-import aiosmtplib
 from email.message import EmailMessage
+
+import aiosmtplib
 import structlog
-from app.notifications.providers.base_provider import EmailProvider
+
 from app.notifications.config.smtp import smtp_config
+from app.notifications.providers.base_provider import EmailProvider
 
 logger = structlog.get_logger(__name__)
 

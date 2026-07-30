@@ -1,18 +1,17 @@
-import asyncio
 import time
 from uuid import UUID
+
 import structlog
+from prometheus_client import Counter, Histogram
 
 from app.background.jobs.base_job import BaseJob
 from app.db.session import SessionLocal
+from app.notifications.email.renderer import TemplateEngine
+from app.notifications.enums.status import NotificationStatus
+from app.notifications.providers.smtp_provider import SMTPProvider
 from app.notifications.services.notification_service import NotificationService
 from app.notifications.services.template_service import TemplateService
-from app.notifications.email.renderer import TemplateEngine
-from app.notifications.providers.smtp_provider import SMTPProvider
-from app.notifications.enums.status import NotificationStatus
 from app.repositories.user import UserRepository
-
-from prometheus_client import Counter, Histogram
 
 EMAILS_SENT_TOTAL = Counter('emails_sent_total', 'Total emails successfully sent')
 EMAILS_FAILED_TOTAL = Counter('emails_failed_total', 'Total emails failed to send')

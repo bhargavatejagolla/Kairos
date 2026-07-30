@@ -1,14 +1,17 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-import structlog
 import hashlib
-import json
-from uuid import UUID
-from typing import Optional
 
+import structlog
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.audit.models import (
+    AuditActor,
+    AuditChange,
+    AuditLog,
+    AuditMetadata,
+    AuditTarget,
+)
 from app.audit.repositories.audit_repository import AuditRepository
-from app.audit.models import AuditLog, AuditActor, AuditTarget, AuditChange, AuditMetadata
 from app.audit.schemas.audit import AuditEventCreate
-from app.audit.enums.action import AuditAction
 
 logger = structlog.get_logger(__name__)
 

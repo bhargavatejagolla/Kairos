@@ -1,10 +1,11 @@
-from datetime import datetime
-from sqlalchemy import Column, String, Integer, Float, DateTime, ForeignKey, Text, Enum as SQLEnum
+from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
-from app.db.models.base import BaseModel
 from app.background.enums.task_state import TaskState
+from app.db.models.base import BaseModel
+
 
 class TaskExecution(BaseModel):
     __tablename__ = "task_executions"

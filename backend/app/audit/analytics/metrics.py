@@ -1,17 +1,19 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func
-from typing import Dict, Any, List
-from datetime import datetime, timedelta, UTC
+from datetime import UTC, datetime, timedelta
+from typing import Any
 from uuid import UUID
 
-from app.audit.models.audit_log import AuditLog
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.audit.models.actor import AuditActor
+from app.audit.models.audit_log import AuditLog
+
 
 class AuditAnalyticsEngine:
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def get_activity_summary(self, organization_id: UUID, days: int = 7) -> Dict[str, Any]:
+    async def get_activity_summary(self, organization_id: UUID, days: int = 7) -> dict[str, Any]:
         """
         Returns a high-level summary of activity for the dashboard.
         """
@@ -37,7 +39,7 @@ class AuditAnalyticsEngine:
             "period_days": days
         }
 
-    async def get_most_active_users(self, organization_id: UUID, days: int = 7, limit: int = 5) -> List[Dict[str, Any]]:
+    async def get_most_active_users(self, organization_id: UUID, days: int = 7, limit: int = 5) -> list[dict[str, Any]]:
         since = datetime.now(UTC) - timedelta(days=days)
         
         stmt = (

@@ -1,8 +1,10 @@
 from datetime import datetime
-from sqlalchemy import String, Text, DateTime
+
+from sqlalchemy import DateTime, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
+
 
 class AICache(Base):
     __tablename__ = "ai_cache"

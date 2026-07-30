@@ -53,9 +53,9 @@ class Organization(BaseModel):
         nullable=False,
     )
 
-    created_by: Mapped["User"] = relationship(foreign_keys=[created_by_id])
+    created_by: Mapped[User] = relationship(foreign_keys=[created_by_id])
 
-    members: Mapped[list["OrganizationMember"]] = relationship(
+    members: Mapped[list[OrganizationMember]] = relationship(
         back_populates="organization",
         cascade="all, delete-orphan",
         lazy="selectin",

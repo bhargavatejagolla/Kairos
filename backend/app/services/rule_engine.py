@@ -1,9 +1,9 @@
 import logging
-from typing import List, Optional
-from app.db.models.signal import Signal
-from app.db.models.alert_rule import AlertRule
+
 from app.db.models.alert_condition import AlertCondition
+from app.db.models.alert_rule import AlertRule
 from app.db.models.enums import AlertOperator
+from app.db.models.signal import Signal
 from app.schemas.evaluation import EvaluationResult
 from app.services.fingerprint_engine import FingerprintEngine
 
@@ -16,7 +16,7 @@ class RuleEngine:
     def __init__(self):
         self.fingerprint_engine = FingerprintEngine()
 
-    def evaluate(self, signal: Signal, active_rules: List[AlertRule]) -> List[EvaluationResult]:
+    def evaluate(self, signal: Signal, active_rules: list[AlertRule]) -> list[EvaluationResult]:
         """
         Checks a signal against a list of active rules for its service.
         """

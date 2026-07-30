@@ -1,4 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.db.models.user import User
 from app.schemas.organization import OrganizationCreate
 from app.services.organization_service import OrganizationService

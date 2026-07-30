@@ -1,9 +1,10 @@
+import contextvars
+import uuid
+
+import structlog
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response
-import uuid
-import contextvars
-import structlog
 
 # Global contextvar to hold the correlation ID for the current request
 correlation_id_var: contextvars.ContextVar[str] = contextvars.ContextVar('correlation_id', default=None)

@@ -1,11 +1,12 @@
-from pydantic import BaseModel, ConfigDict
-from typing import Optional
 from datetime import datetime
+
+from pydantic import BaseModel, ConfigDict
+
 
 class WorkerResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     hostname: str
-    queue: Optional[str]
+    queue: str | None
     status: str
     running_tasks: int
-    heartbeat: Optional[datetime]
+    heartbeat: datetime | None

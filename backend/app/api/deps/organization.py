@@ -6,7 +6,6 @@ from app.api.deps.auth import ActiveUserDep
 from app.api.deps.services import get_organization_service
 from app.core.exceptions import OrganizationNotFoundError, PermissionDeniedError
 from app.core.organization_context import OrganizationContext
-from app.db.models.user import User
 from app.services.organization_service import OrganizationService
 
 

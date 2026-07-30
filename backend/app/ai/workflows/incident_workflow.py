@@ -1,13 +1,15 @@
-from typing import Any, Dict
-from app.ai.agents.root_cause_agent import RootCauseAgent
+from typing import Any
+
 from app.ai.agents.recommendation_agent import RecommendationAgent
+from app.ai.agents.root_cause_agent import RootCauseAgent
+
 
 class IncidentWorkflow:
     def __init__(self):
         self.root_cause_agent = RootCauseAgent()
         self.recommendation_agent = RecommendationAgent()
         
-    async def analyze(self, incident_id: str) -> Dict[str, Any]:
+    async def analyze(self, incident_id: str) -> dict[str, Any]:
         context = {"incident_id": incident_id}
         
         # 1. Gather Root Cause

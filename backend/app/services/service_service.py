@@ -1,13 +1,13 @@
+from collections.abc import Sequence
 from uuid import UUID
-from typing import Sequence
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.exceptions import ResourceNotFoundException as ResourceNotFoundError, DuplicateResourceException as ResourceAlreadyExistsError
+from app.core.exceptions import DuplicateResourceException as ResourceAlreadyExistsError
+from app.core.exceptions import ResourceNotFoundException as ResourceNotFoundError
+from app.core.project_context import ProjectContext
 from app.db.models.service import Service
 from app.repositories.service import ServiceRepository
 from app.schemas.service import ServiceCreate, ServiceUpdate
-from app.core.organization_context import OrganizationContext
-from app.core.project_context import ProjectContext
+
 
 class ServiceService:
     def __init__(self, repository: ServiceRepository):

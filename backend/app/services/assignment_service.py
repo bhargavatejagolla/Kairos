@@ -1,10 +1,10 @@
 from uuid import UUID
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.db.models.incident import Incident
 from app.core.exceptions import BadRequestException
+from app.db.models.incident import Incident
 from app.repositories.incident import IncidentRepository
 from app.repositories.user import UserRepository
+
 
 class AssignmentService:
     def __init__(self, incident_repo: IncidentRepository, user_repo: UserRepository):

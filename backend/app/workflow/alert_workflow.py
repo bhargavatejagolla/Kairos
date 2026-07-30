@@ -1,18 +1,16 @@
 import logging
-from typing import List, Optional
 from uuid import UUID
-from datetime import datetime, timezone
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.workflow.workflow_context import AlertContext
-from app.schemas.signal import SignalIn
-from app.db.models.signal import Signal
 from app.db.models.alert import Alert
-
-from app.services.signal_service import SignalService
-from app.services.rule_engine import RuleEngine
+from app.db.models.signal import Signal
 from app.repositories.alert_rule import AlertRuleRepository
+from app.schemas.signal import SignalIn
 from app.services.alert_engine import AlertEngine
+from app.services.rule_engine import RuleEngine
+from app.services.signal_service import SignalService
+from app.workflow.workflow_context import AlertContext
 
 logger = logging.getLogger(__name__)
 

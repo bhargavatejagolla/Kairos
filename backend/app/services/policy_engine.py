@@ -1,5 +1,6 @@
 import logging
 from uuid import UUID
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.alert import Alert

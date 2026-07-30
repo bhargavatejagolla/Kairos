@@ -1,18 +1,21 @@
-import pytest
-from uuid import uuid4
+from collections.abc import AsyncGenerator
 
-from app.core.exceptions import EnvironmentNotFoundError, ProjectAlreadyExistsError, ProjectArchivedError
+import pytest
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.pool import StaticPool
+
+from app.core.exceptions import (
+    ProjectAlreadyExistsError,
+    ProjectArchivedError,
+)
 from app.core.project import ProjectStatus, ProjectVisibility
+from app.db.base import Base
+from app.db.models.organization import Organization
+from app.db.models.user import User
 from app.repositories.environment import EnvironmentRepository
 from app.repositories.project import ProjectRepository
 from app.schemas.project import ProjectCreate, ProjectUpdate
 from app.services.project_service import ProjectService
-from app.db.base import Base
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
-from sqlalchemy.pool import StaticPool
-from collections.abc import AsyncGenerator
-from app.db.models.user import User
-from app.db.models.organization import Organization
 
 engine = create_async_engine(
     "sqlite+aiosqlite:///:memory:",

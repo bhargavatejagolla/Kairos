@@ -1,6 +1,4 @@
 import pytest
-from app.repositories.service import ServiceRepository
-from app.db.models.enums import ServiceStatus
 
 pytestmark = pytest.mark.asyncio
 

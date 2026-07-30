@@ -1,13 +1,15 @@
+from typing import Any
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from typing import List, Any
+
 from app.api.deps.database import get_db
-from app.background.schemas.worker import WorkerResponse
 from app.background.repositories.worker_repository import WorkerRepository
+from app.background.schemas.worker import WorkerResponse
 
 router = APIRouter(prefix="/background/workers", tags=["Background Workers"])
 
-@router.get("", response_model=List[WorkerResponse])
+@router.get("", response_model=list[WorkerResponse])
 async def list_workers(
     skip: int = 0,
     limit: int = 100,

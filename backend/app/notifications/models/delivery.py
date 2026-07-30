@@ -1,9 +1,11 @@
 from datetime import datetime
 from uuid import UUID
+
+from sqlalchemy import DateTime, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, ForeignKey, DateTime, Text
 
 from app.db.models.base import BaseModel
+
 
 class NotificationDelivery(BaseModel):
     __tablename__ = "notification_deliveries"

@@ -5,7 +5,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.project import ProjectStatus, ProjectVisibility
 from app.db.models.base import Base
-from app.db.models.mixins import OrganizationOwnedModel, TimestampMixin, UUIDPrimaryKeyMixin
+from app.db.models.mixins import (
+    OrganizationOwnedModel,
+    TimestampMixin,
+    UUIDPrimaryKeyMixin,
+)
 
 
 class Project(Base, OrganizationOwnedModel, UUIDPrimaryKeyMixin, TimestampMixin):

@@ -1,8 +1,10 @@
 import uuid
-from sqlalchemy import String, ForeignKey, Integer, Float
+
+from sqlalchemy import Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.models.base import BaseModel
+
 
 class AIUsage(BaseModel):
     __tablename__ = "ai_usage"

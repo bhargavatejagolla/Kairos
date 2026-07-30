@@ -1,16 +1,18 @@
-from fastapi import Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
 from uuid import UUID
 
-from app.api.deps.database import get_db
+from fastapi import Depends, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.api.deps.auth import get_current_user
-# from app.api.deps.service import get_service_context
-from app.db.models.user import User
-from app.db.models.service import Service
+from app.api.deps.database import get_db
 from app.db.models.environment import Environment
 from app.db.models.project import Project
-from app.db.models.organization import Organization
+from app.db.models.service import Service
+
+# from app.api.deps.service import get_service_context
+from app.db.models.user import User
 from app.workflow.workflow_context import AlertContext
+
 
 async def get_alert_context(
     service_id: UUID,

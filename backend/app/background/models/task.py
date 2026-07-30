@@ -1,14 +1,13 @@
-import uuid
-from typing import Any, Dict
-from datetime import datetime
-from sqlalchemy import Column, String, JSON, Integer, Float, DateTime, ForeignKey, Enum as SQLEnum, Text
+from sqlalchemy import JSON, Column, DateTime, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
-from app.db.models.base import BaseModel
-from app.background.enums.task_state import TaskState
-from app.background.enums.task_priority import TaskPriority
 from app.background.enums.task_category import TaskCategory
+from app.background.enums.task_priority import TaskPriority
+from app.background.enums.task_state import TaskState
+from app.db.models.base import BaseModel
+
 
 class BackgroundTask(BaseModel):
     __tablename__ = "background_tasks"

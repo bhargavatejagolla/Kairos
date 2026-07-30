@@ -1,6 +1,7 @@
 import pytest
 from httpx import AsyncClient
 
+
 @pytest.mark.asyncio
 async def test_ingest_signal_api(client: AsyncClient, token_headers: dict):
     # This is a stub for the E2E API test for signal ingestion

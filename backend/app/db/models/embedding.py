@@ -1,8 +1,8 @@
-import uuid
-from sqlalchemy import String, ForeignKey, Integer
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from pgvector.sqlalchemy import Vector
 from typing import TYPE_CHECKING
+
+from pgvector.sqlalchemy import Vector
+from sqlalchemy import Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.models.base import BaseModel
 

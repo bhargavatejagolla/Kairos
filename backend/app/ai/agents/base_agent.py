@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Any, Dict
+from typing import Any
+
 from app.ai.tools.registry import ToolRegistry
+
 
 class BaseAgent(ABC):
     def __init__(self, tool_registry: ToolRegistry | None = None):
@@ -12,5 +14,5 @@ class BaseAgent(ABC):
         pass
         
     @abstractmethod
-    async def run(self, context: Dict[str, Any]) -> Dict[str, Any]:
+    async def run(self, context: dict[str, Any]) -> dict[str, Any]:
         pass

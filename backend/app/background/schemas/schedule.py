@@ -1,11 +1,12 @@
-from pydantic import BaseModel, ConfigDict
-from typing import Optional
 from datetime import datetime
+
+from pydantic import BaseModel, ConfigDict
+
 
 class ScheduleResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     task_name: str
     cron: str
     enabled: bool
-    next_run: Optional[datetime]
-    last_run: Optional[datetime]
+    next_run: datetime | None
+    last_run: datetime | None

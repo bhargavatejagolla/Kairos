@@ -1,8 +1,15 @@
-from uuid import UUID
 from datetime import datetime
+from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict
 
-from app.db.models.enums import IncidentStatus, IncidentSeverity, IncidentPriority, IncidentSource
+from app.db.models.enums import (
+    IncidentPriority,
+    IncidentSeverity,
+    IncidentSource,
+    IncidentStatus,
+)
+
 
 class IncidentCreate(BaseModel):
     title: str

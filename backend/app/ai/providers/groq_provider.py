@@ -1,7 +1,8 @@
-from app.ai.providers.base import LLMProvider
-import os
+
 import groq
-from typing import Dict, Any
+
+from app.ai.providers.base import LLMProvider
+
 
 class GroqProvider(LLMProvider):
     def __init__(self, api_key: str):

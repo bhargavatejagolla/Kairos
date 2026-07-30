@@ -59,23 +59,23 @@ class OrganizationMember(BaseModel):
         index=True,
     )
 
-    organization: Mapped["Organization"] = relationship(
+    organization: Mapped[Organization] = relationship(
         "Organization",
         back_populates="members",
     )
 
-    role: Mapped["Role"] = relationship(
+    role: Mapped[Role] = relationship(
         "Role",
         back_populates="members",
     )
 
-    user: Mapped["User"] = relationship(
+    user: Mapped[User] = relationship(
         "User",
         foreign_keys=[user_id],
         back_populates="organizations",
     )
 
-    invited_by: Mapped["User | None"] = relationship(
+    invited_by: Mapped[User | None] = relationship(
         "User",
         foreign_keys=[invited_by_id],
     )

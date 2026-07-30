@@ -1,7 +1,10 @@
 from datetime import datetime
 from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict
+
 from app.notifications.enums.category import NotificationCategory
+
 
 class EmailTemplateBase(BaseModel):
     name: str

@@ -5,7 +5,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.environment import Environment
 from app.repositories.base import BaseRepository
-from app.schemas.environment import EnvironmentCreate, EnvironmentUpdate
 
 
 class EnvironmentRepository(BaseRepository[Environment]):

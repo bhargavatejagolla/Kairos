@@ -1,14 +1,16 @@
-from uuid import UUID
 from datetime import datetime
+from typing import Any
+from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict
-from typing import Dict, Any
 
 from app.db.models.enums import TimelineEvent
+
 
 class TimelineEntryCreate(BaseModel):
     event_type: TimelineEvent
     message: str | None = None
-    metadata_: Dict[str, Any] = {}
+    metadata_: dict[str, Any] = {}
 
 class TimelineEntryResponse(TimelineEntryCreate):
     id: UUID

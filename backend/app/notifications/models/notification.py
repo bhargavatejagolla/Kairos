@@ -1,13 +1,15 @@
 from datetime import datetime
 from uuid import UUID
+
+from sqlalchemy import JSON, DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, ForeignKey, DateTime, JSON
 
 from app.db.models.base import BaseModel
-from app.notifications.enums.status import NotificationStatus
-from app.notifications.enums.priority import NotificationPriority
-from app.notifications.enums.channel import NotificationChannel
 from app.notifications.enums.category import NotificationCategory
+from app.notifications.enums.channel import NotificationChannel
+from app.notifications.enums.priority import NotificationPriority
+from app.notifications.enums.status import NotificationStatus
+
 
 class Notification(BaseModel):
     __tablename__ = "notifications"

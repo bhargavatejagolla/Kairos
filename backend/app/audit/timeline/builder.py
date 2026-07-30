@@ -1,12 +1,13 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, or_, and_
-from sqlalchemy.orm import selectinload
-from typing import List, Optional
 from uuid import UUID
 
-from app.audit.models.audit_log import AuditLog
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
+
 from app.audit.models.actor import AuditActor
+from app.audit.models.audit_log import AuditLog
 from app.audit.models.target import AuditTarget
+
 
 class TimelineBuilder:
     """
@@ -16,7 +17,7 @@ class TimelineBuilder:
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def get_by_correlation_id(self, correlation_id: str) -> List[AuditLog]:
+    async def get_by_correlation_id(self, correlation_id: str) -> list[AuditLog]:
         stmt = (
             select(AuditLog)
             .options(
@@ -31,7 +32,7 @@ class TimelineBuilder:
         result = await self.session.execute(stmt)
         return list(result.scalars().all())
 
-    async def get_by_resource_id(self, resource_id: str) -> List[AuditLog]:
+    async def get_by_resource_id(self, resource_id: str) -> list[AuditLog]:
         """
         Builds a timeline for a specific resource (Incident, Alert, etc.)
         It finds any audit log where this resource is a target.
@@ -51,7 +52,7 @@ class TimelineBuilder:
         result = await self.session.execute(stmt)
         return list(result.scalars().all())
 
-    async def get_by_actor_id(self, actor_id: str) -> List[AuditLog]:
+    async def get_by_actor_id(self, actor_id: str) -> list[AuditLog]:
         """
         Builds a timeline of all actions taken by a specific user or system actor.
         """
@@ -70,7 +71,7 @@ class TimelineBuilder:
         result = await self.session.execute(stmt)
         return list(result.scalars().all())
 
-    async def get_by_project_id(self, project_id: UUID) -> List[AuditLog]:
+    async def get_by_project_id(self, project_id: UUID) -> list[AuditLog]:
         """
         Builds a timeline of all activity within a specific project.
         """

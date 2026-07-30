@@ -1,15 +1,18 @@
 from datetime import datetime
-from typing import Optional, Dict, Any
+from typing import Any
 from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict
-from app.db.models.enums import SignalType, AlertSource
+
+from app.db.models.enums import AlertSource, SignalType
+
 
 class SignalIn(BaseModel):
     signal_type: SignalType
     source: AlertSource
-    value: Optional[float] = None
-    unit: Optional[str] = None
-    metadata_: Optional[Dict[str, Any]] = None
+    value: float | None = None
+    unit: str | None = None
+    metadata_: dict[str, Any] | None = None
     received_at: datetime
 
 class SignalOut(SignalIn):

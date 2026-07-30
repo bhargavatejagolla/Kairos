@@ -1,6 +1,6 @@
-from uuid import UUID
-from app.repositories.base import BaseRepository
 from app.notifications.models.notification import Notification
+from app.repositories.base import BaseRepository
+
 
 class NotificationRepository(BaseRepository[Notification]):
     def __init__(self, session):

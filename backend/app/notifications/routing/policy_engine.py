@@ -1,7 +1,8 @@
 from uuid import UUID
+
+import redis.asyncio as aioredis
 import structlog
 from sqlalchemy.ext.asyncio import AsyncSession
-import redis.asyncio as aioredis
 
 from app.core.config import settings
 from app.notifications.services.preference_service import PreferenceService

@@ -1,8 +1,11 @@
 from uuid import UUID
-from app.notifications.repositories.preference_repository import PreferenceRepository
-from app.notifications.models.preference import NotificationPreference
-from app.notifications.schemas.preference import NotificationPreferenceUpdate
+
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.notifications.models.preference import NotificationPreference
+from app.notifications.repositories.preference_repository import PreferenceRepository
+from app.notifications.schemas.preference import NotificationPreferenceUpdate
+
 
 class PreferenceService:
     def __init__(self, session: AsyncSession):

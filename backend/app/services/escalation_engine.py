@@ -1,9 +1,11 @@
 import logging
 from uuid import UUID
+
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.db.models.alert import Alert
-from app.services.notification_router import NotificationRouter
 from app.repositories.escalation_policy import EscalationPolicyRepository
+from app.services.notification_router import NotificationRouter
 
 logger = logging.getLogger(__name__)
 

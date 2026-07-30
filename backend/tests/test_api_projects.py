@@ -1,4 +1,5 @@
 from collections.abc import AsyncGenerator
+
 import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
@@ -63,8 +64,9 @@ async def test_project_api_flow() -> None:
 
         # We must insert an environment directly since we don't have an Environment API yet
         async with TestingSessionLocal() as session:
-            from app.db.models.environment import Environment
             import uuid
+
+            from app.db.models.environment import Environment
             org_id = uuid.UUID(res_org.json()["id"])
             env = Environment(id=uuid.uuid4(), organization_id=org_id, name="Dev", slug="dev", color="green")
             session.add(env)

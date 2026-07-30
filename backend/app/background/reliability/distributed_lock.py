@@ -1,5 +1,7 @@
-import redis
 from contextlib import contextmanager
+
+import redis
+
 from app.core.config import settings
 
 # Shared Redis client for background platform

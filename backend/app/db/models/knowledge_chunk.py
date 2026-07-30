@@ -1,13 +1,14 @@
 import uuid
+from typing import TYPE_CHECKING
+
 from sqlalchemy import ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from typing import TYPE_CHECKING
 
 from app.db.models.base import BaseModel
 
 if TYPE_CHECKING:
-    from app.db.models.knowledge_document import KnowledgeDocument
     from app.db.models.embedding import Embedding
+    from app.db.models.knowledge_document import KnowledgeDocument
 
 class KnowledgeChunk(BaseModel):
     __tablename__ = "knowledge_chunks"

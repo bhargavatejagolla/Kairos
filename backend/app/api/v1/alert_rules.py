@@ -1,16 +1,15 @@
-from fastapi import APIRouter, Depends, status, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
-from typing import List
-from uuid import UUID
 
-from app.api.deps.database import get_db
+from fastapi import APIRouter, Depends, status
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.api.dependencies.alert import get_alert_context
-from app.workflow.workflow_context import AlertContext
-from app.schemas.alert_rule import RuleCreate, RuleResponse
-from app.repositories.alert_rule import AlertRuleRepository
+from app.api.deps.database import get_db
+from app.db.models.alert_condition import AlertCondition
 from app.db.models.alert_rule import AlertRule
 from app.db.models.rule_definition import RuleDefinition
-from app.db.models.alert_condition import AlertCondition
+from app.repositories.alert_rule import AlertRuleRepository
+from app.schemas.alert_rule import RuleCreate, RuleResponse
+from app.workflow.workflow_context import AlertContext
 
 router = APIRouter(prefix="/services/{service_id}/rules", tags=["Alert Rules"])
 

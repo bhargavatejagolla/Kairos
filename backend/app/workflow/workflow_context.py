@@ -1,12 +1,11 @@
 from dataclasses import dataclass
-from typing import Optional, List
-from uuid import UUID
 
+from app.db.models.environment import Environment
 from app.db.models.organization import Organization
 from app.db.models.project import Project
-from app.db.models.environment import Environment
 from app.db.models.service import Service
 from app.db.models.user import User
+
 
 @dataclass
 class AlertContext:
@@ -20,8 +19,8 @@ class AlertContext:
     actor: User
     
     # Active policies resolved during request lifecycle
-    active_policies: List[str] = None
-    active_silences: List[str] = None
+    active_policies: list[str] = None
+    active_silences: list[str] = None
     
     def __post_init__(self):
         if self.active_policies is None:

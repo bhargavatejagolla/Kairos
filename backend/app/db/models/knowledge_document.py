@@ -1,7 +1,8 @@
 import uuid
-from sqlalchemy import String, ForeignKey
+from typing import TYPE_CHECKING
+
+from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from typing import List, TYPE_CHECKING
 
 from app.db.models.base import BaseModel
 
@@ -18,4 +19,4 @@ class KnowledgeDocument(BaseModel):
     status: Mapped[str] = mapped_column(String(50), default="active")
     
     # Relationships
-    chunks: Mapped[List["KnowledgeChunk"]] = relationship("KnowledgeChunk", back_populates="document", cascade="all, delete-orphan")
+    chunks: Mapped[list["KnowledgeChunk"]] = relationship("KnowledgeChunk", back_populates="document", cascade="all, delete-orphan")

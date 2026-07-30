@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class NotificationChannelType(str, Enum):
     EMAIL = "EMAIL"
     SLACK = "SLACK"

@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TaskCategory(str, Enum):
     AI = "AI"
     NOTIFICATION = "NOTIFICATION"

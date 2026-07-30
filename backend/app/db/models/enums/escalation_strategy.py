@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class EscalationStrategy(str, Enum):
     LINEAR = "LINEAR"
     EXPONENTIAL = "EXPONENTIAL"

@@ -1,5 +1,7 @@
 import time
+
 from .distributed_lock import redis_client
+
 
 class RateLimitExceeded(Exception):
     pass

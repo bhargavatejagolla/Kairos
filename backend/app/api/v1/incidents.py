@@ -1,26 +1,26 @@
-from fastapi import APIRouter, Depends, status, Path
 from typing import Annotated
 
-from app.api.deps.service import ServiceContextDep
-from app.api.deps.incident import IncidentDep
-from app.api.deps.search import IncidentSearchDep
-from app.api.deps.pagination import PaginationParams
+from fastapi import APIRouter, Depends, status
+
 from app.api.deps.authorization import require_incident_permission
 from app.api.deps.hardening import get_idempotency_key
-from app.core.permissions import Permission
+from app.api.deps.incident import IncidentDep
+from app.api.deps.pagination import PaginationParams
+from app.api.deps.search import IncidentSearchDep
+from app.api.deps.service import ServiceContextDep
+from app.api.deps.services import get_incident_service
 from app.core.command_bus import command_bus
-from app.workflow.commands import (
-    CreateIncidentCommand, 
-    AcknowledgeIncidentCommand,
-    ResolveIncidentCommand,
-    MitigateIncidentCommand,
-    CloseIncidentCommand,
-    AssignIncidentCommand
-)
+from app.core.permissions import Permission
 from app.schemas.incident import IncidentCreate, IncidentResponse
 from app.schemas.pagination import PaginatedResponse
-from app.api.deps.services import get_incident_service
 from app.services.incident_service import IncidentService
+from app.workflow.commands import (
+    AcknowledgeIncidentCommand,
+    CloseIncidentCommand,
+    CreateIncidentCommand,
+    MitigateIncidentCommand,
+    ResolveIncidentCommand,
+)
 
 router = APIRouter(tags=["Incidents"])
 

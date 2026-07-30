@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends
-from typing import Annotated
 
-from app.api.deps.service import ServiceContextDep
-from app.api.deps.search import IncidentSearchDep
+from fastapi import APIRouter, Depends
+
 from app.api.deps.authorization import require_service_permission
+from app.api.deps.search import IncidentSearchDep
+from app.api.deps.service import ServiceContextDep
 from app.core.permissions import Permission
 from app.schemas.statistics import IncidentStatistics
 

@@ -1,10 +1,12 @@
 import logging
 from uuid import UUID
+
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.db.models.alert_rule import AlertRule
-from app.db.models.rule_definition import RuleDefinition
+
 from app.db.models.alert_condition import AlertCondition
-from app.db.models.enums import AlertSeverity, SignalType, AlertOperator
+from app.db.models.alert_rule import AlertRule
+from app.db.models.enums import AlertOperator, AlertSeverity, SignalType
+from app.db.models.rule_definition import RuleDefinition
 
 logger = logging.getLogger(__name__)
 

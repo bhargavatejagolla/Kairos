@@ -1,10 +1,12 @@
-from typing import Sequence
+from collections.abc import Sequence
 from uuid import UUID
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.notification_channel import NotificationChannel
 from app.repositories.base import BaseRepository
+
 
 class NotificationChannelRepository(BaseRepository[NotificationChannel]):
     def __init__(self, session: AsyncSession):

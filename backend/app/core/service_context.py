@@ -8,6 +8,7 @@ from app.db.models.project_settings import ProjectSettings
 from app.db.models.role import Role
 from app.db.models.service import Service
 
+
 @dataclass
 class ServiceContext:
     organization: Organization

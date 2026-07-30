@@ -1,9 +1,11 @@
+from collections.abc import Sequence
 from uuid import UUID
-from typing import Sequence
+
 from sqlalchemy import select
 
-from app.repositories.base import BaseRepository
 from app.db.models.incident_comment import IncidentComment
+from app.repositories.base import BaseRepository
+
 
 class CommentRepository(BaseRepository[IncidentComment]):
     def __init__(self, session):

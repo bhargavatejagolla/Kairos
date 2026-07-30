@@ -1,8 +1,10 @@
-from uuid import UUID
 from datetime import datetime
+from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict
 
-from app.db.models.enums import ServiceType, ServiceStatus, ServiceTier, RuntimeType
+from app.db.models.enums import RuntimeType, ServiceStatus, ServiceTier, ServiceType
+
 
 class ServiceCreate(BaseModel):
     name: str

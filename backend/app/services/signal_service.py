@@ -1,10 +1,11 @@
 import logging
-from typing import List
 from uuid import UUID
+
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.db.models.signal import Signal
 from app.repositories.signal import SignalRepository
 from app.schemas.signal import SignalIn
-from app.db.models.signal import Signal
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +35,7 @@ class SignalService:
         # Next steps: Evaluate signal via RuleEngine
         return signal_model
 
-    async def bulk_ingest(self, service_id: UUID, signals: List[SignalIn]) -> None:
+    async def bulk_ingest(self, service_id: UUID, signals: list[SignalIn]) -> None:
         """
         Optimized append-only ingestion for multiple telemetry points.
         """

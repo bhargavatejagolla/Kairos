@@ -1,14 +1,16 @@
-from typing import Optional
 from uuid import UUID
-from sqlalchemy import select, and_
-from app.repositories.base import BaseRepository
+
+from sqlalchemy import and_, select
+
 from app.notifications.models.template import EmailTemplate
+from app.repositories.base import BaseRepository
+
 
 class TemplateRepository(BaseRepository[EmailTemplate]):
     def __init__(self, session):
         super().__init__(EmailTemplate, session)
 
-    async def get_by_slug(self, slug: str, organization_id: Optional[UUID] = None) -> Optional[EmailTemplate]:
+    async def get_by_slug(self, slug: str, organization_id: UUID | None = None) -> EmailTemplate | None:
         conditions = [EmailTemplate.slug == slug, EmailTemplate.is_active == True]
         if organization_id:
             # Check for org-specific template, fallback to global

@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Depends, status
-from typing import Annotated
 
-from app.api.deps.incident import IncidentDep
+from fastapi import APIRouter, Depends, status
+
 from app.api.deps.authorization import require_incident_permission
+from app.api.deps.incident import IncidentDep
 from app.core.permissions import Permission
-from app.core.command_bus import command_bus
 
 router = APIRouter(tags=["Comments"])
 

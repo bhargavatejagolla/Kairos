@@ -1,4 +1,5 @@
 from celery import Celery
+
 from .config import background_config
 from .queues import CELERY_QUEUES
 from .routing import CELERY_ROUTES
@@ -25,13 +26,16 @@ celery_app.conf.update(
 # Autodiscover tasks from all standard modules
 celery_app.autodiscover_tasks(['app.background', 'app.notifications', 'app.events', 'app.audit'])
 
-from celery.signals import task_prerun, task_postrun
-import structlog
 import uuid
-from app.middleware.correlation import correlation_id_var
+
+import structlog
+from celery.signals import task_postrun, task_prerun
 
 # Instrument Celery for OpenTelemetry
 from opentelemetry.instrumentation.celery import CeleryInstrumentor
+
+from app.middleware.correlation import correlation_id_var
+
 CeleryInstrumentor().instrument()
 
 @task_prerun.connect

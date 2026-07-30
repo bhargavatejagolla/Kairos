@@ -1,18 +1,14 @@
-from typing import Dict, Any
-from uuid import UUID
 
 from app.core.command_bus import CommandHandler, command_bus
-from app.workflow.commands import (
-    CreateIncidentCommand, 
-    UpdateIncidentStatusCommand,
-    AssignIncidentCommand
-)
-from app.services.incident_service import IncidentService
-from app.services.assignment_service import AssignmentService
 from app.db.models.incident import Incident
-from app.core.project_context import ProjectContext
-from app.db.models.organization import Organization
-from app.db.models.project import Project
+from app.services.assignment_service import AssignmentService
+from app.services.incident_service import IncidentService
+from app.workflow.commands import (
+    AssignIncidentCommand,
+    CreateIncidentCommand,
+    UpdateIncidentStatusCommand,
+)
+
 
 class CreateIncidentHandler(CommandHandler[CreateIncidentCommand, Incident]):
     def __init__(self, incident_service: IncidentService):
@@ -62,8 +58,12 @@ def register_incident_handlers(incident_service: IncidentService, assignment_ser
     # make the endpoint instantiate the base class).
     status_handler = UpdateIncidentStatusHandler(incident_service)
     command_bus.register(UpdateIncidentStatusCommand, status_handler)
-    from app.workflow.commands import (AcknowledgeIncidentCommand, ResolveIncidentCommand, 
-                                     MitigateIncidentCommand, CloseIncidentCommand)
+    from app.workflow.commands import (
+        AcknowledgeIncidentCommand,
+        CloseIncidentCommand,
+        MitigateIncidentCommand,
+        ResolveIncidentCommand,
+    )
     command_bus.register(AcknowledgeIncidentCommand, status_handler)
     command_bus.register(ResolveIncidentCommand, status_handler)
     command_bus.register(MitigateIncidentCommand, status_handler)

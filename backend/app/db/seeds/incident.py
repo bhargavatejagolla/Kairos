@@ -1,16 +1,24 @@
-import asyncio
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from uuid import UUID
 
-from app.db.models.organization import Organization
-from app.db.models.project import Project
+from app.db.models.enums import (
+    IncidentPriority,
+    IncidentSeverity,
+    IncidentSource,
+    IncidentStatus,
+    RuntimeType,
+    ServiceStatus,
+    ServiceTier,
+    ServiceType,
+    TimelineEvent,
+)
 from app.db.models.environment import Environment
-from app.db.models.service import Service
 from app.db.models.incident import Incident
 from app.db.models.incident_timeline import IncidentTimeline
-from app.db.models.enums import ServiceType, RuntimeType, ServiceTier, ServiceStatus
-from app.db.models.enums import IncidentStatus, IncidentSeverity, IncidentPriority, IncidentSource, TimelineEvent
+from app.db.models.organization import Organization
+from app.db.models.project import Project
+from app.db.models.service import Service
+
 
 async def seed_incident_domain(session: AsyncSession) -> None:
     # Get first project and environment

@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class AlertSource(str, Enum):
     PROMETHEUS = "PROMETHEUS"
     DATADOG = "DATADOG"

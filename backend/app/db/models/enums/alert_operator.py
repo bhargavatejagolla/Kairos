@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class AlertOperator(str, Enum):
     GREATER_THAN = ">"
     GREATER_THAN_EQUAL = ">="

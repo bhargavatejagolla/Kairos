@@ -4,7 +4,7 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Query, status
 
 from app.api.deps.auth import get_current_user
-from app.api.deps.organization import OrganizationContextDep, get_organization_context
+from app.api.deps.organization import OrganizationContextDep
 from app.api.deps.project import ProjectContextDep
 from app.api.deps.rbac import RequirePermission
 from app.api.deps.services import get_project_service, get_project_settings_service
@@ -12,7 +12,12 @@ from app.core.pagination import PaginationParams, get_pagination_params
 from app.core.permissions import Permission
 from app.core.project import ProjectStatus
 from app.schemas.pagination import PaginatedResponse
-from app.schemas.project import ProjectCreate, ProjectDetails, ProjectResponse, ProjectUpdate
+from app.schemas.project import (
+    ProjectCreate,
+    ProjectDetails,
+    ProjectResponse,
+    ProjectUpdate,
+)
 from app.schemas.project_settings import ProjectSettingsResponse, ProjectSettingsUpdate
 from app.services.project_service import ProjectService
 from app.services.project_settings_service import ProjectSettingsService

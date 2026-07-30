@@ -1,15 +1,17 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-from typing import Dict, Any, Tuple, List
+from typing import Any
 
-from app.audit.search.query_builder import AuditQueryBuilder
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.audit.models.audit_log import AuditLog
+from app.audit.search.query_builder import AuditQueryBuilder
+
 
 class AuditSearchEngine:
     def __init__(self, session: AsyncSession):
         self.session = session
         self.builder = AuditQueryBuilder()
 
-    async def search(self, filters: Dict[str, Any], page: int = 1, page_size: int = 50) -> Tuple[List[AuditLog], int]:
+    async def search(self, filters: dict[str, Any], page: int = 1, page_size: int = 50) -> tuple[list[AuditLog], int]:
         """
         Executes a paginated search against the audit logs.
         """

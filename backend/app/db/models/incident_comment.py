@@ -1,9 +1,10 @@
-from sqlalchemy import Column, String, ForeignKey, DateTime
+
+from sqlalchemy import Column, DateTime, ForeignKey, String
 from sqlalchemy.orm import relationship
-from datetime import datetime
 
 from app.db.models.base import Base
-from app.db.models.mixins import UUIDPrimaryKeyMixin, TimestampMixin
+from app.db.models.mixins import TimestampMixin, UUIDPrimaryKeyMixin
+
 
 class IncidentComment(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     __tablename__ = "incident_comments"

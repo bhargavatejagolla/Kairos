@@ -1,8 +1,11 @@
 from uuid import UUID
-from app.notifications.repositories.template_repository import TemplateRepository
-from app.notifications.models.template import EmailTemplate
-from app.notifications.schemas.template import EmailTemplateCreate, EmailTemplateUpdate
+
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.notifications.models.template import EmailTemplate
+from app.notifications.repositories.template_repository import TemplateRepository
+from app.notifications.schemas.template import EmailTemplateCreate, EmailTemplateUpdate
+
 
 class TemplateService:
     def __init__(self, session: AsyncSession):

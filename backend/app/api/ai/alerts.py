@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+
 from app.ai.workflows.alert_workflow import AlertWorkflow
 
 router = APIRouter()

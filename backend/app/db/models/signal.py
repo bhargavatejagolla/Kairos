@@ -1,9 +1,10 @@
-from sqlalchemy import Column, String, ForeignKey, Enum, Float, JSON, DateTime, Index
+from sqlalchemy import JSON, Column, DateTime, Enum, Float, ForeignKey, Index, String
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base
+from app.db.models.enums import AlertSource, SignalType
 from app.db.models.mixins import UUIDPrimaryKeyMixin
-from app.db.models.enums import SignalType, AlertSource
+
 
 class Signal(Base, UUIDPrimaryKeyMixin):
     __tablename__ = "signals"

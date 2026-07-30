@@ -1,12 +1,12 @@
 import hashlib
-from typing import Optional
+
 
 class FingerprintEngine:
     """
     Generates deterministic fingerprints for alerts to enable deduplication and correlation.
     """
     
-    def generate(self, service_id: str, rule_id: str, labels: Optional[dict] = None) -> str:
+    def generate(self, service_id: str, rule_id: str, labels: dict | None = None) -> str:
         """
         Creates a SHA-256 hash based on service, rule, and optional labels.
         """

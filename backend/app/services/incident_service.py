@@ -1,17 +1,18 @@
+from datetime import UTC, datetime
 from uuid import UUID
-from datetime import datetime, UTC
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.exceptions import ResourceNotFoundException as ResourceNotFoundError
-from app.db.models.incident import Incident
-from app.db.models.enums import IncidentStatus, TimelineEvent
-from app.repositories.incident import IncidentRepository
-from app.schemas.incident import IncidentCreate, IncidentUpdate
-from app.core.organization_context import OrganizationContext
 from app.core.project_context import ProjectContext
-from app.core.state_machine import StateMachine, StateTransitionError
+from app.core.state_machine import StateMachine
 from app.core.workflow import WorkflowEngine
+from app.db.models.enums import IncidentStatus, TimelineEvent
+from app.db.models.incident import Incident
+from app.repositories.incident import IncidentRepository
+from app.schemas.incident import IncidentCreate
 from app.services.timeline_service import TimelineService
+
 
 class IncidentStateMachine(StateMachine[IncidentStatus, Incident]):
     def __init__(self, timeline_service: TimelineService):

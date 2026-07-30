@@ -1,8 +1,10 @@
-from datetime import datetime, timezone
 import logging
+from datetime import datetime, timezone
 from uuid import UUID
-from sqlalchemy.ext.asyncio import AsyncSession
+
 from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.db.models.api_key import APIKey
 
 logger = logging.getLogger(__name__)
