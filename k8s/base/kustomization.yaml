@@ -13,6 +13,9 @@ resources:
 - ingress/ingress.yaml
 - networkpolicy/default-deny.yaml
 - networkpolicy/allow-internal.yaml
+- backend/hpa.yaml
+- frontend/hpa.yaml
+- worker/hpa.yaml
 images:
 - name: kairos-api
   newName: kairos-api
