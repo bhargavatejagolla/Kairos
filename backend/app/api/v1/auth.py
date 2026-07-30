@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, Request, status
 
 from app.api.deps.auth import ActiveUserDep
 from app.api.deps.services import get_auth_service
+from fastapi_limiter.depends import RateLimiter
 from app.schemas.auth import (
     ChangePasswordRequest,
     CurrentUserResponse,
@@ -25,6 +26,7 @@ AuthServiceDep = Annotated[AuthService, Depends(get_auth_service)]
     status_code=status.HTTP_200_OK,
     summary="Authenticate a user",
     description="Returns access and refresh tokens.",
+    dependencies=[Depends(RateLimiter(times=10, seconds=60))],
 )
 async def login(
     request: Request,
@@ -95,6 +97,7 @@ async def get_current_user_profile(
     "/change-password",
     status_code=status.HTTP_200_OK,
     summary="Change current authenticated user password",
+    dependencies=[Depends(RateLimiter(times=5, seconds=60))],
 )
 async def change_password(
     change_in: ChangePasswordRequest,
