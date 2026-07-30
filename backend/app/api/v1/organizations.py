@@ -2,6 +2,7 @@ from typing import Annotated
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, status
+from fastapi_cache.decorator import cache
 
 from app.api.deps.auth import ActiveUserDep
 from app.api.deps.organization import OrganizationContextDep
@@ -40,6 +41,7 @@ async def create_organization(
     "",
     response_model=list[OrganizationResponse],
 )
+@cache(expire=60)
 async def list_organizations(
     current_user: ActiveUserDep,
     org_service: Annotated[OrganizationService, Depends(get_organization_service)],

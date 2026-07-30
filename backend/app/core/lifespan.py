@@ -10,6 +10,8 @@ from app.events.bus import event_bus
 from app.notifications.events.notification_events import register_notification_events
 import redis.asyncio as redis
 from fastapi_limiter import FastAPILimiter
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
 
 
 @asynccontextmanager
@@ -32,9 +34,10 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         environment=settings.app_env,
     )
     
-    # Initialize Rate Limiter
+    # Initialize Rate Limiter & Cache
     redis_conn = redis.from_url(settings.redis_url, encoding="utf-8", decode_responses=True)
     await FastAPILimiter.init(redis_conn)
+    FastAPICache.init(RedisBackend(redis_conn), prefix="kairos-cache")
 
     yield
 
