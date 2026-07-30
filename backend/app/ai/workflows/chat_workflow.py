@@ -1,4 +1,5 @@
 from typing import Any
+from tenacity import retry, stop_after_attempt, wait_exponential
 
 from app.ai.agents.chat_agent import ChatAgent
 
@@ -15,6 +16,11 @@ class ChatWorkflow:
         self.chat_agent = ChatAgent()
         self.session_manager = SessionManager()
         
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        reraise=True
+    )
     async def chat(self, session_id: str, message: str) -> dict[str, Any]:
         context = self.session_manager.get_context(session_id)
         context["message"] = message
