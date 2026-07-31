@@ -45,7 +45,7 @@ async def client(db_session: AsyncSession) -> AsyncGenerator[AsyncClient, None]:
         yield db_session
 
     class MockAuthService(AuthorizationService):
-        async def has_permission(self, user, permission, org_id=None):
+        def has_permission(self, context, permission):
             return False
 
     app.dependency_overrides[get_db] = override_get_db
@@ -59,13 +59,12 @@ async def client(db_session: AsyncSession) -> AsyncGenerator[AsyncClient, None]:
 
 
 @pytest.mark.anyio
-async def test_full_authorization_flow(client: AsyncClient) -> None:
-    # 1. Create User (Superuser to bypass phase 6 dummy logic for now)
-    # Wait, the registration endpoint does not allow setting is_superuser directly.
-    # To test the flow, we should mock the AuthorizationService within this integration test,
-    # or just trust that since it's an integration test, we can manually set is_superuser in DB.
+async def test_full_authorization_flow(client: AsyncClient, db_session: AsyncSession) -> None:
+    # We must seed RBAC roles for the organization creation to work!
+    from app.db.seeds.seed_runner import seed_rbac
+    await seed_rbac(db_session)
 
-    # Let's just create a normal user and verify it gets a 403 when trying to access a protected route
+    # 1. Register User
     register_payload = {
         "email": "authz@example.com",
         "username": "authzuser",
@@ -86,10 +85,17 @@ async def test_full_authorization_flow(client: AsyncClient) -> None:
     )
     assert res_login.status_code == 200
     token = res_login.json()["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
 
-    # 3. Access Protected Endpoint (roles listing requires authentication and role permissions)
-    # The user we created is not a superuser, so it should be denied access (403)
-    res_roles = await client.get(
-        "/api/v1/roles", headers={"Authorization": f"Bearer {token}"}
+    # 3. Create Organization (to get a context)
+    org_payload = {"name": "Authz Org", "slug": "authz-org"}
+    res_org = await client.post("/api/v1/organizations", json=org_payload, headers=headers)
+    assert res_org.status_code == 201
+
+    # 4. Access Protected Endpoint 
+    # Because we mocked AuthorizationService to ALWAYS return False for has_permission,
+    # even the owner will get a 403 when trying to update the org.
+    res_update = await client.patch(
+        "/api/v1/organizations/authz-org", json={"name": "New Name"}, headers=headers
     )
-    assert res_roles.status_code == 403
+    assert res_update.status_code == 403

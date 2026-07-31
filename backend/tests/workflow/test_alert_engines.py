@@ -31,10 +31,12 @@ def test_rule_engine_evaluation():
         version=1,
         conditions=[condition]
     )
+    from app.db.models.enums import AlertSeverity
     rule = AlertRule(
         id=uuid4(),
         service_id=signal.service_id,
         name="High CPU",
+        severity=AlertSeverity.CRITICAL,
         definitions=[definition]
     )
     

@@ -4,9 +4,7 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, status
 
 from app.api.deps.auth import ActiveUserDep
-from app.api.deps.rbac import require_permission
 from app.api.deps.services import get_role_service
-from app.core.permissions import Permission
 from app.schemas.role import (
     AssignPermissionRequest,
     RoleCreate,
@@ -16,10 +14,6 @@ from app.schemas.role import (
 from app.services.role_service import RoleService
 
 router = APIRouter(tags=["roles"])
-
-RequireRolesRead = Depends(require_permission(Permission.USERS_READ.value))
-RequireRolesWrite = Depends(require_permission(Permission.USERS_UPDATE.value))
-# TODO: Once we have finer-grained permissions for roles themselves, update these.
 
 
 @router.post(
@@ -31,7 +25,6 @@ RequireRolesWrite = Depends(require_permission(Permission.USERS_UPDATE.value))
 async def create_role(
     data: RoleCreate,
     current_user: ActiveUserDep,
-    _: Annotated[None, RequireRolesWrite],
     role_service: Annotated[RoleService, Depends(get_role_service)],
 ) -> RoleResponse:
     # TODO: In Phase 7, restrict this to Super Admins or Org Owners
@@ -45,7 +38,6 @@ async def create_role(
 )
 async def list_roles(
     current_user: ActiveUserDep,
-    _: Annotated[None, RequireRolesRead],
     role_service: Annotated[RoleService, Depends(get_role_service)],
 ) -> list[RoleResponse]:
     return await role_service.list_roles()
@@ -59,7 +51,6 @@ async def list_roles(
 async def get_role(
     role_id: UUID,
     current_user: ActiveUserDep,
-    _: Annotated[None, RequireRolesRead],
     role_service: Annotated[RoleService, Depends(get_role_service)],
 ) -> RoleResponse:
     return await role_service.get_role(role_id)
@@ -74,7 +65,6 @@ async def update_role(
     role_id: UUID,
     data: RoleUpdate,
     current_user: ActiveUserDep,
-    _: Annotated[None, RequireRolesWrite],
     role_service: Annotated[RoleService, Depends(get_role_service)],
 ) -> RoleResponse:
     # TODO: In Phase 7, restrict this
@@ -89,7 +79,6 @@ async def update_role(
 async def delete_role(
     role_id: UUID,
     current_user: ActiveUserDep,
-    _: Annotated[None, RequireRolesWrite],
     role_service: Annotated[RoleService, Depends(get_role_service)],
 ) -> None:
     # TODO: In Phase 7, restrict this
@@ -105,7 +94,6 @@ async def assign_permission(
     role_id: UUID,
     data: AssignPermissionRequest,
     current_user: ActiveUserDep,
-    _: Annotated[None, RequireRolesWrite],
     role_service: Annotated[RoleService, Depends(get_role_service)],
 ) -> RoleResponse:
     # TODO: In Phase 7, restrict this
@@ -121,7 +109,6 @@ async def remove_permission(
     role_id: UUID,
     permission_id: UUID,
     current_user: ActiveUserDep,
-    _: Annotated[None, RequireRolesWrite],
     role_service: Annotated[RoleService, Depends(get_role_service)],
 ) -> RoleResponse:
     # TODO: In Phase 7, restrict this
