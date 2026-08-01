@@ -19,7 +19,7 @@ resources:
 images:
 - name: kairos-api
   newName: kairos-api
-  newTag: efce785
+  newTag: 5f0a997
 - name: kairos-app
   newName: kairos-app
-  newTag: efce785
+  newTag: 5f0a997
