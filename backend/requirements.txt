@@ -42,8 +42,8 @@ pydantic==2.13.4
 pydantic-settings==2.7.1
 pydantic_core==2.46.4
 PyJWT==2.13.0
-pytest==8.3.4
-pytest-cov==7.1.0
+pytest
+pytest-cov
 python-discovery==1.5.0
 python-dotenv==1.0.1
 pytokens==0.4.1
