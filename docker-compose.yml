@@ -90,7 +90,7 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    command: celery -A app.background.celery_app beat --loglevel=info
+    command: celery -A app.background.celery_app beat --loglevel=info -s /tmp/celerybeat-schedule
     volumes:
       - ./backend:/app
     depends_on:
