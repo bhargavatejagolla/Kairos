@@ -41,7 +41,7 @@ restart: ## Perform a rolling restart of the backend deployment
 	kubectl rollout restart deployment/worker -n $(NAMESPACE)
 
 port-forward: ## Port forward the ingress or services for local testing
-	@echo "Forwarding API to http://localhost:8000 and App to http://localhost:3000"
+	@echo "Forwarding API to http://localhost:8080 and App to http://localhost:3000"
 	@echo "Run these in separate terminals if needed."
-	kubectl port-forward -n $(NAMESPACE) svc/backend 8000:8000 &
+	kubectl port-forward -n $(NAMESPACE) svc/backend 8080:8000 &
 	kubectl port-forward -n $(NAMESPACE) svc/frontend 3000:80 &
