@@ -51,7 +51,7 @@ In modern enterprise environments (Site Reliability Engineering & DevOps), debug
   <table>
     <tr>
       <td align="center"><img src="https://img.icons8.com/color/48/000000/grafana.png"/><br/><b>Grafana</b><br/>Searching for CPU/Memory spikes</td>
-      <td align="center"><img src="https://img.icons8.com/color/48/000000/log.png"/><br/><b>Loki / ELK</b><br/>Scouring for error traces</td>
+      <td align="center"><img src="https://img.icons8.com/color/48/000000/elasticsearch.png"/><br/><b>Loki / ELK</b><br/>Scouring for error traces</td>
       <td align="center"><img src="https://img.icons8.com/color/48/000000/kubernetes.png"/><br/><b>Kubernetes</b><br/>Checking for CrashLoopBackOff</td>
       <td align="center"><img src="https://img.icons8.com/color/48/000000/github.png"/><br/><b>GitHub CI/CD</b><br/>Checking who broke the build</td>
     </tr>
